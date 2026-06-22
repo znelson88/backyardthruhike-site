@@ -1,0 +1,25 @@
+---
+layout: base.njk
+title: About
+permalink: /about/
+---
+
+<section class="hero" style="padding: var(--space-4) 0 var(--space-3);">
+  <svg class="contours" viewBox="0 0 1080 200" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M-20,160 C150,140 250,180 400,150 C550,120 650,160 820,140 C950,120 1000,150 1100,130" fill="none" stroke="#C7BC9C" stroke-width="2"/>
+    <path d="M-20,180 C150,160 250,200 400,170 C550,140 650,180 820,160 C950,140 1000,170 1100,150" fill="none" stroke="#C7BC9C" stroke-width="1.5"/>
+  </svg>
+  <div class="wrap">
+    <p class="hero-eyebrow">{{ pageabout.eyebrow }}</p>
+    <h1>{{ pageabout.headline }}</h1>
+    <p class="lede">{{ pageabout.lede }}</p>
+  </div>
+</section>
+
+<main>
+  <section class="wrap">
+    <div style="max-width: 65ch;">
+      {{ pageabout.body | safe }}
+    </div>
+  </section>
+</main>
