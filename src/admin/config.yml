@@ -98,6 +98,11 @@ collections:
           - { label: Eyebrow text, name: eyebrow, widget: string }
           - { label: Headline, name: headline, widget: string }
           - { label: Lede paragraph, name: lede, widget: text }
+          - { label: Access status label, name: access_status, widget: string, hint: "e.g. 'Access not yet open' or 'Now accepting requests'" }
+          - { label: Form title, name: form_title, widget: string }
+          - { label: Form description, name: form_description, widget: text }
+          - { label: Success message, name: form_success, widget: string, hint: "Shown after a request is submitted." }
+          - { label: Error message, name: form_error, widget: string, hint: "Shown if submission fails." }
       - label: Photo Gallery
         name: gallery
         file: src/_data/gallery.json
