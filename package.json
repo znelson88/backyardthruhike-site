@@ -3,9 +3,14 @@
   "version": "1.0.0",
   "scripts": {
     "build": "eleventy",
-    "start": "eleventy --serve"
+    "start": "eleventy --serve",
+    "deploy": "npm run build && wrangler deploy",
+    "preview": "npm run build && wrangler dev"
   },
   "dependencies": {
     "@11ty/eleventy": "^2.0.1"
+  },
+  "devDependencies": {
+    "wrangler": "^4.103.0"
   }
 }
