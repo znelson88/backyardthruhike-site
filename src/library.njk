@@ -1,33 +1,8 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Library — Backyard Thru Hike</title>
-<meta name="description" content="Request access to the Backyard Thru Hike library.">
-<link rel="stylesheet" href="styles.css">
-</head>
-<body>
-
-<header class="site-header">
-  <div class="wrap">
-    <a class="brand" href="index.html">
-      <span class="blaze" aria-hidden="true"><span></span><span></span></span>
-      <span>
-        <span class="brand-name">Backyard Thru Hike</span>
-        <span class="brand-sub">Your backyard is wild enough</span>
-      </span>
-    </a>
-    <nav class="main-nav" aria-label="Primary">
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="blog.html">Blog</a></li>
-        <li><a href="photos.html">Photos</a></li>
-        <li><a href="library.html" aria-current="page">Library</a></li>
-      </ul>
-    </nav>
-  </div>
-</header>
+---
+layout: base.njk
+title: Library
+permalink: /library/
+---
 
 <section class="hero" style="padding: var(--space-4) 0 var(--space-3);">
   <svg class="contours" viewBox="0 0 1080 200" preserveAspectRatio="none" aria-hidden="true">
@@ -54,12 +29,6 @@
         </p>
       </div>
 
-      <!--
-        TEMPORARY: this form currently opens the visitor's email client (mailto)
-        so it works immediately with no backend. Once the Worker-based request
-        system from your build plan is live, swap the <form> action below to
-        point at that Worker's /api/request-access endpoint instead.
-      -->
       <form class="request-form" action="mailto:you@backyardthruhike.com" method="post" enctype="text/plain">
         <div>
           <label for="name">Name</label>
@@ -79,13 +48,3 @@
     </div>
   </section>
 </main>
-
-<footer class="site-footer">
-  <div class="wrap">
-    <span class="mono">Backyard Thru Hike</span>
-    <span class="mono">backyardthruhike.com</span>
-  </div>
-</footer>
-
-</body>
-</html>

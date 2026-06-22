@@ -1,0 +1,31 @@
+---
+layout: base.njk
+title: Blog
+permalink: /blog/
+---
+
+<section class="hero" style="padding: var(--space-4) 0 var(--space-3);">
+  <svg class="contours" viewBox="0 0 1080 200" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M-20,160 C150,140 250,180 400,150 C550,120 650,160 820,140 C950,120 1000,150 1100,130" fill="none" stroke="#C7BC9C" stroke-width="2"/>
+    <path d="M-20,180 C150,160 250,200 400,170 C550,140 650,180 820,160 C950,140 1000,170 1100,150" fill="none" stroke="#C7BC9C" stroke-width="1.5"/>
+  </svg>
+  <div class="wrap">
+    <p class="hero-eyebrow">Journal</p>
+    <h1>Field notes</h1>
+    <p class="lede">Observations, essays, and slow walks — from backyards, neighborhood parks, and the overlooked spaces in between.</p>
+  </div>
+</section>
+
+<main>
+  <section class="wrap">
+    <div class="card-grid">
+      {% for post in collections.blog %}
+      <article class="card">
+        <span class="mono">{{ post.data.type }} &middot; {{ post.date | readableDate }}</span>
+        <h3><a href="{{ post.url }}">{{ post.data.title }}</a></h3>
+        <p>{{ post.data.summary }}</p>
+      </article>
+      {% endfor %}
+    </div>
+  </section>
+</main>

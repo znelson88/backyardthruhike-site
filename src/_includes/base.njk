@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{% if title and title != "Home" %}{{ title }} — {% endif %}Backyard Thru Hike</title>
+<meta name="description" content="{{ description or 'Backyard Thru Hike — finding the national park in the space you already have.' }}">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">
+      <span class="blaze" aria-hidden="true"><span></span><span></span></span>
+      <span>
+        <span class="brand-name">Backyard Thru Hike</span>
+        <span class="brand-sub">Your backyard is wild enough</span>
+      </span>
+    </a>
+    <nav class="main-nav" aria-label="Primary">
+      <ul>
+        <li><a href="/" {% if page.url == "/" %}aria-current="page"{% endif %}>Home</a></li>
+        <li><a href="/blog/" {% if "/blog" in page.url %}aria-current="page"{% endif %}>Blog</a></li>
+        <li><a href="/photos/" {% if page.url == "/photos/" %}aria-current="page"{% endif %}>Photos</a></li>
+        <li><a href="/library/" {% if page.url == "/library/" %}aria-current="page"{% endif %}>Library</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+{{ content | safe }}
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span class="mono">Backyard Thru Hike</span>
+    <span class="mono">backyardthruhike.com</span>
+  </div>
+</footer>
+
+</body>
+</html>

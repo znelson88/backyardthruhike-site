@@ -1,0 +1,60 @@
+---
+layout: base.njk
+title: Home
+---
+
+<section class="hero">
+  <svg class="contours" viewBox="0 0 1080 360" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M-20,300 C150,260 250,340 400,290 C550,240 650,310 820,270 C950,240 1000,280 1100,250" fill="none" stroke="#C7BC9C" stroke-width="2"/>
+    <path d="M-20,330 C150,290 250,370 400,320 C550,270 650,340 820,300 C950,270 1000,310 1100,280" fill="none" stroke="#C7BC9C" stroke-width="2"/>
+    <path d="M-20,270 C150,230 250,310 400,260 C550,210 650,280 820,240 C950,210 1000,250 1100,220" fill="none" stroke="#C7BC9C" stroke-width="1.5"/>
+    <path d="M-20,240 C150,200 250,280 400,230 C550,180 650,250 820,210 C950,180 1000,220 1100,190" fill="none" stroke="#C7BC9C" stroke-width="1.5"/>
+  </svg>
+  <div class="wrap">
+    <p class="hero-eyebrow">Backyard naturalism &middot; est. 2026</p>
+    <h1>The national park<br>you already have.</h1>
+    <p class="lede">Most people will never get to Yellowstone or the Smokies. That doesn't mean there's nothing to explore. This site is about learning to see the nature that's already around you — a backyard, a vacant lot, a park at the end of the street.</p>
+    <p style="margin-top: 2rem;">
+      <a class="btn" href="/blog/">Read the journal</a>
+      <a class="btn btn-outline" href="/library/" style="margin-left: 0.75rem;">Visit the library</a>
+    </p>
+  </div>
+</section>
+
+<svg class="elevation-divider wrap" viewBox="0 0 1080 56" preserveAspectRatio="none" aria-hidden="true">
+  <polyline points="0,40 90,30 180,42 270,18 360,34 450,10 540,28 630,16 720,36 810,22 900,30 990,12 1080,26"
+    fill="none" stroke="#C1542C" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+</svg>
+
+<main>
+  <section class="wrap">
+    <div class="section-head">
+      <h2>Latest entries</h2>
+      <a href="/blog/" class="mono">All entries &rarr;</a>
+    </div>
+    <div class="card-grid">
+      {% for post in collections.blog | limit(3) %}
+      <article class="card">
+        <span class="mono">{{ post.data.type }} &middot; {{ post.date | readableDate }}</span>
+        <h3><a href="{{ post.url }}">{{ post.data.title }}</a></h3>
+        <p>{{ post.data.summary }}</p>
+      </article>
+      {% endfor %}
+    </div>
+  </section>
+
+  <section class="wrap">
+    <div class="section-head">
+      <h2>From the gallery</h2>
+      <a href="/photos/" class="mono">All photos &rarr;</a>
+    </div>
+    <div class="photo-grid">
+      {% for photo in gallery.photos | limit(3) %}
+      <figure>
+        <img src="{{ photo.src }}" alt="{{ photo.alt }}">
+        <figcaption>{{ photo.caption }}</figcaption>
+      </figure>
+      {% endfor %}
+    </div>
+  </section>
+</main>
