@@ -27,9 +27,11 @@ permalink: /library/
           Tell me a little about yourself and what draws you to local nature. I read every request personally —
           once approved, I'll set up access and send it your way.
         </p>
+        <p id="form-sent" style="display:none; color: var(--color-forest); font-weight: 600;">Request sent — I'll be in touch.</p>
+        <p id="form-error" style="display:none; color: var(--color-rust);">Something went wrong. Please try again.</p>
       </div>
 
-      <form class="request-form" action="mailto:you@backyardthruhike.com" method="post" enctype="text/plain">
+      <form class="request-form" action="https://delicate-butterfly-16f1.znelson88.workers.dev/submit" method="post" id="library-form">
         <div>
           <label for="name">Name</label>
           <input type="text" id="name" name="name" required>
@@ -48,3 +50,13 @@ permalink: /library/
     </div>
   </section>
 </main>
+<script>
+  const p = new URLSearchParams(location.search);
+  if (p.get('sent')) {
+    document.getElementById('form-sent').style.display = 'block';
+    document.getElementById('library-form').style.display = 'none';
+  }
+  if (p.get('error')) {
+    document.getElementById('form-error').style.display = 'block';
+  }
+</script>
