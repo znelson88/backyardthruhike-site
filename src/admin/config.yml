@@ -5,6 +5,7 @@ backend:
   auth_type: pkce
   app_id: Ov23ligS6jWG6HwLq5hI
 
+
 media_folder: src/images
 public_folder: /images
 
