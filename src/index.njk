@@ -11,12 +11,12 @@ title: Home
     <path d="M-20,240 C150,200 250,280 400,230 C550,180 650,250 820,210 C950,180 1000,220 1100,190" fill="none" stroke="#C7BC9C" stroke-width="1.5"/>
   </svg>
   <div class="wrap">
-    <p class="hero-eyebrow">Backyard naturalism &middot; est. 2026</p>
-    <h1>The national park<br>you already have.</h1>
-    <p class="lede">Most people will never get to Yellowstone or the Smokies. That doesn't mean there's nothing to explore. This site is about learning to see the nature that's already around you — a backyard, a vacant lot, a park at the end of the street.</p>
+    <p class="hero-eyebrow">{{ homepage.eyebrow }}</p>
+    <h1>{{ homepage.headline | replace("\n", "<br>") | safe }}</h1>
+    <p class="lede">{{ homepage.lede }}</p>
     <p style="margin-top: 2rem;">
-      <a class="btn" href="/blog/">Read the journal</a>
-      <a class="btn btn-outline" href="/library/" style="margin-left: 0.75rem;">Visit the library</a>
+      <a class="btn" href="{{ homepage.cta_primary_url }}">{{ homepage.cta_primary_label }}</a>
+      <a class="btn btn-outline" href="{{ homepage.cta_secondary_url }}" style="margin-left: 0.75rem;">{{ homepage.cta_secondary_label }}</a>
     </p>
   </div>
 </section>
