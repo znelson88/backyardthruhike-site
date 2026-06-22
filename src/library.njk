@@ -21,14 +21,11 @@ permalink: /library/
     <div class="library-panel">
 
       <div>
-        <span class="trail-status"><span class="dot" aria-hidden="true"></span> Access not yet open</span>
-        <h2 style="margin-top: 0.75rem;">Request an invite</h2>
-        <p style="max-width: 56ch; color: var(--color-ink-soft);">
-          Tell me a little about yourself and what draws you to local nature. I read every request personally —
-          once approved, I'll set up access and send it your way.
-        </p>
-        <p id="form-sent" style="display:none; color: var(--color-forest); font-weight: 600;">Request sent — I'll be in touch.</p>
-        <p id="form-error" style="display:none; color: var(--color-rust);">Something went wrong. Please try again.</p>
+        <span class="trail-status"><span class="dot" aria-hidden="true"></span> {{ pagelibrary.access_status }}</span>
+        <h2 style="margin-top: 0.75rem;">{{ pagelibrary.form_title }}</h2>
+        <p style="max-width: 56ch; color: var(--color-ink-soft);">{{ pagelibrary.form_description }}</p>
+        <p id="form-sent" style="display:none; color: var(--color-forest); font-weight: 600;">{{ pagelibrary.form_success }}</p>
+        <p id="form-error" style="display:none; color: var(--color-rust);">{{ pagelibrary.form_error }}</p>
       </div>
 
       <form class="request-form" action="https://delicate-butterfly-16f1.znelson88.workers.dev/submit" method="post" id="library-form">
