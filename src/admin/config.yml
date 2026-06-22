@@ -27,6 +27,17 @@ collections:
   - name: settings
     label: Site Settings
     files:
+      - label: Homepage
+        name: homepage
+        file: src/_data/homepage.json
+        fields:
+          - { label: Eyebrow text, name: eyebrow, widget: string, hint: "Small line above the headline, e.g. 'Backyard naturalism · est. 2026'" }
+          - { label: Headline, name: headline, widget: string, hint: "Main hero headline. Use a newline character (\n) to break the line." }
+          - { label: Lede paragraph, name: lede, widget: text }
+          - { label: Primary button label, name: cta_primary_label, widget: string }
+          - { label: Primary button URL, name: cta_primary_url, widget: string }
+          - { label: Secondary button label, name: cta_secondary_label, widget: string }
+          - { label: Secondary button URL, name: cta_secondary_url, widget: string }
       - label: Photo Gallery
         name: gallery
         file: src/_data/gallery.json
