@@ -38,6 +38,14 @@ collections:
           - { label: Primary button URL, name: cta_primary_url, widget: string }
           - { label: Secondary button label, name: cta_secondary_label, widget: string }
           - { label: Secondary button URL, name: cta_secondary_url, widget: string }
+      - label: Header & Footer
+        name: siteconfig
+        file: src/_data/siteconfig.json
+        fields:
+          - { label: Site name, name: brand_name, widget: string, hint: "Shown in the header logo and browser tab." }
+          - { label: Header tagline, name: brand_tagline, widget: string, hint: "Small text below the site name in the header." }
+          - { label: Footer name, name: footer_name, widget: string }
+          - { label: Footer URL text, name: footer_url, widget: string }
       - label: About page
         name: pageabout
         file: src/_data/pageabout.json
