@@ -2,7 +2,7 @@ backend:
   name: github
   repo: znelson88/backyardthruhike-site
   branch: main
-  base_url: https://backyardthruhike-oauth.znelson88.workers.dev
+  base_url: https://delicate-butterfly-16f1.znelson88.workers.dev
 
 
 media_folder: src/images
