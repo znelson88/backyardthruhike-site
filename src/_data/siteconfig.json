@@ -4,10 +4,25 @@
   "footer_name": "Backyard Thru Hike",
   "footer_url": "backyardthruhike.com",
   "nav": [
-    { "label": "Home", "url": "/" },
-    { "label": "Blog", "url": "/blog/" },
-    { "label": "Events", "url": "/events/" },
-    { "label": "About", "url": "/about/" },
-    { "label": "Library", "url": "/library/" }
+    {
+      "label": "Home",
+      "url": "/"
+    },
+    {
+      "label": "Blog",
+      "url": "/blog/"
+    },
+    {
+      "label": "Events",
+      "url": "/events/"
+    },
+    {
+      "label": "About",
+      "url": "/about/"
+    },
+    {
+      "label": "Corner Library",
+      "url": "/library/"
+    }
   ]
 }
