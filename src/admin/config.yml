@@ -38,6 +38,30 @@ collections:
           - { label: Primary button URL, name: cta_primary_url, widget: string }
           - { label: Secondary button label, name: cta_secondary_label, widget: string }
           - { label: Secondary button URL, name: cta_secondary_url, widget: string }
+      - label: About page
+        name: pageabout
+        file: src/_data/pageabout.json
+        fields:
+          - { label: Eyebrow text, name: eyebrow, widget: string }
+          - { label: Headline, name: headline, widget: string }
+          - { label: Lede paragraph, name: lede, widget: text }
+          - { label: Body content, name: body, widget: markdown, hint: "Main content below the hero section." }
+      - label: Events page
+        name: pageevents
+        file: src/_data/pageevents.json
+        fields:
+          - { label: Eyebrow text, name: eyebrow, widget: string }
+          - { label: Headline, name: headline, widget: string }
+          - { label: Lede paragraph, name: lede, widget: text }
+          - { label: Empty state message, name: empty_message, widget: string, hint: "Shown when there are no events listed." }
+          - label: Events
+            name: events
+            widget: list
+            fields:
+              - { label: Title, name: title, widget: string }
+              - { label: Date, name: date, widget: string, hint: "e.g. July 12, 2026" }
+              - { label: Location, name: location, widget: string, required: false }
+              - { label: Description, name: description, widget: text }
       - label: Blog page
         name: pageblog
         file: src/_data/pageblog.json
