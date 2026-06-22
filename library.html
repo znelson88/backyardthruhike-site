@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Library — Backyard Thru Hike</title>
+<meta name="description" content="Request access to the Backyard Thru Hike library.">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="index.html">
+      <span class="blaze" aria-hidden="true"><span></span><span></span></span>
+      <span>
+        <span class="brand-name">Backyard Thru Hike</span>
+        <span class="brand-sub">Mile 0 and counting</span>
+      </span>
+    </a>
+    <nav class="main-nav" aria-label="Primary">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="blog.html">Blog</a></li>
+        <li><a href="photos.html">Photos</a></li>
+        <li><a href="library.html" aria-current="page">Library</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" style="padding: var(--space-4) 0 var(--space-3);">
+  <svg class="contours" viewBox="0 0 1080 200" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M-20,160 C150,140 250,180 400,150 C550,120 650,160 820,140 C950,120 1000,150 1100,130" fill="none" stroke="#C7BC9C" stroke-width="2"/>
+    <path d="M-20,180 C150,160 250,200 400,170 C550,140 650,180 820,160 C950,140 1000,170 1100,150" fill="none" stroke="#C7BC9C" stroke-width="1.5"/>
+  </svg>
+  <div class="wrap">
+    <p class="hero-eyebrow">Library</p>
+    <h1>A small collection,<br>by request</h1>
+    <p class="lede">Guidebooks, field references, and a few favorites — shared with people I know. Access is by request and reviewed individually.</p>
+  </div>
+</section>
+
+<main>
+  <section class="wrap">
+    <div class="library-panel">
+
+      <div>
+        <span class="trail-status"><span class="dot" aria-hidden="true"></span> Access not yet open</span>
+        <h2 style="margin-top: 0.75rem;">Request an invite</h2>
+        <p style="max-width: 56ch; color: var(--color-ink-soft);">
+          Tell me a little about yourself below. I read every request myself —
+          once approved, I'll set up a login and send it your way.
+        </p>
+      </div>
+
+      <!--
+        TEMPORARY: this form currently opens the visitor's email client (mailto)
+        so it works immediately with no backend. Once the Worker-based request
+        system from your build plan is live, swap the <form> action below to
+        point at that Worker's /api/request-access endpoint instead.
+      -->
+      <form class="request-form" action="mailto:you@backyardthruhike.com" method="post" enctype="text/plain">
+        <div>
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div>
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div>
+          <label for="note">A bit about why you'd like access</label>
+          <textarea id="note" name="note" rows="4"></textarea>
+        </div>
+        <button type="submit" class="btn">Send request</button>
+      </form>
+
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <span class="mono">Backyard Thru Hike</span>
+    <span class="mono">backyardthruhike.com</span>
+  </div>
+</footer>
+
+</body>
+</html>
