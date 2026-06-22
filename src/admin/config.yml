@@ -46,6 +46,13 @@ collections:
           - { label: Header tagline, name: brand_tagline, widget: string, hint: "Small text below the site name in the header." }
           - { label: Footer name, name: footer_name, widget: string }
           - { label: Footer URL text, name: footer_url, widget: string }
+          - label: Navigation links
+            name: nav
+            widget: list
+            hint: "Controls which links appear in the header nav and their order."
+            fields:
+              - { label: Label, name: label, widget: string }
+              - { label: URL, name: url, widget: string, hint: "Use a path like /blog/ or / for home." }
       - label: About page
         name: pageabout
         file: src/_data/pageabout.json
