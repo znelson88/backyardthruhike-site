@@ -43,18 +43,4 @@ title: Home
     </div>
   </section>
 
-  <section class="wrap">
-    <div class="section-head">
-      <h2>From the gallery</h2>
-      <a href="/photos/" class="mono">All photos &rarr;</a>
-    </div>
-    <div class="photo-grid">
-      {% for photo in gallery.photos | limit(3) %}
-      <figure>
-        <img src="{{ photo.src }}" alt="{{ photo.alt }}">
-        <figcaption>{{ photo.caption }}</figcaption>
-      </figure>
-      {% endfor %}
-    </div>
-  </section>
 </main>
