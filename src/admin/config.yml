@@ -38,6 +38,30 @@ collections:
           - { label: Primary button URL, name: cta_primary_url, widget: string }
           - { label: Secondary button label, name: cta_secondary_label, widget: string }
           - { label: Secondary button URL, name: cta_secondary_url, widget: string }
+      - label: Seasonal Footer Tips
+        name: seasonal-tips
+        file: src/_data/seasonaltips.json
+        fields:
+          - label: Spring tips
+            name: spring
+            widget: list
+            hint: "Tips shown in the footer during March, April, and May."
+            field: { label: Tip, name: tip, widget: text }
+          - label: Summer tips
+            name: summer
+            widget: list
+            hint: "Tips shown in the footer during June, July, and August."
+            field: { label: Tip, name: tip, widget: text }
+          - label: Fall tips
+            name: fall
+            widget: list
+            hint: "Tips shown in the footer during September, October, and November."
+            field: { label: Tip, name: tip, widget: text }
+          - label: Winter tips
+            name: winter
+            widget: list
+            hint: "Tips shown in the footer during December, January, and February."
+            field: { label: Tip, name: tip, widget: text }
       - label: Header & Footer
         name: siteconfig
         file: src/_data/siteconfig.json

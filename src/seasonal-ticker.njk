@@ -1,0 +1,53 @@
+---
+permalink: /seasonal-ticker.js
+eleventyExcludeFromCollections: true
+---
+(function () {
+  var tips = {{ seasonaltips | dump | safe }};
+
+  function getSeason() {
+    var m = new Date().getMonth();
+    if (m >= 2 && m <= 4) return 'spring';
+    if (m >= 5 && m <= 7) return 'summer';
+    if (m >= 8 && m <= 10) return 'fall';
+    return 'winter';
+  }
+
+  function init() {
+    var container = document.getElementById('seasonal-ticker');
+    if (!container) return;
+
+    var season = getSeason();
+    var list = tips[season];
+    var label = container.querySelector('.ticker-season');
+    var slide = container.querySelector('.ticker-slide');
+
+    if (label) label.textContent = season.charAt(0).toUpperCase() + season.slice(1);
+
+    var idx = 0;
+
+    function show(i) {
+      slide.classList.remove('ticker-in');
+      slide.classList.add('ticker-out');
+      setTimeout(function () {
+        slide.textContent = list[i];
+        slide.classList.remove('ticker-out');
+        slide.classList.add('ticker-in');
+      }, 400);
+    }
+
+    slide.textContent = list[0];
+    slide.classList.add('ticker-in');
+
+    setInterval(function () {
+      idx = (idx + 1) % list.length;
+      show(idx);
+    }, 7000);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
