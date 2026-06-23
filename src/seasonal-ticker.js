@@ -1,0 +1,99 @@
+(function () {
+  var tips = {
+    spring: [
+      "Edit or weed out seedlings of desirable plants if too numerous. Remove undesirables such as weeds and invasives — nutsedge becomes visible during April/May and is easy to pull.",
+      "Mulch to conserve moisture, moderate soil temperature, and keep soil from crusting. A 2-inch layer over weed-free beds greatly reduces the need for weeding.",
+      "Use organic mulches — compost, well-rotted manure, shredded leaves, or pine needles — as they break down over time and improve soil structure.",
+      "Keep mulch pulled away from plant crowns to prevent rot. Do not pile mulch against the base of tree trunks ("no mulch volcanoes").",
+      "Consider planting densely or using a fast-growing ground cover like wild strawberry (Fragaria virginiana) as a "green mulch" to crowd out weeds.",
+      "In early spring, cut back spent seed heads and grass stems to stubble 8–24 inches tall to provide nesting cavities for stem-nesting native bees.",
+      "Resist the urge to "spring clean" too early — fallen leaves provide year-round habitat for insects, salamanders, and birds. Leave the leaves until spring.",
+      "Selectively prune shrubs at least two years old. Wait to prune spring-blooming shrubs until after they flower.",
+      "Prune winter-damaged branches on shrubs or trees late to leaf out by April or early May — especially beautyberry (Callicarpa americana) and magnolias.",
+      "Give wildflowers that bloom after mid-July a "spring haircut" in late April or early May — trim 25–75% so they grow more compact later in the season.",
+      "Once spring ephemerals emerge, assess your garden design and fill in gaps to enhance aesthetics and provide more native food sources for pollinators.",
+      "Begin planting native perennials and grasses after your region's last frost date. Divide ferns while fronds are short to minimize damage."
+    ],
+    summer: [
+      "Weed regularly, including editing out undesirable native seedlings as needed.",
+      "Deeply water new plantings. If rain is scarce, supplement with at least 1 inch of water per week — check 4 inches below the surface for moisture.",
+      "Deadhead spent flowers to encourage more blooms. Keep in mind that deadheading reduces seed sources for birds.",
+      "Retain last year's dead stubble through summer — native bee larvae may still be developing in the stems.",
+      "Remove or shorten vigorous, unwanted limbs on new trees. Watch for forks in the main trunk and remove the weaker leader early.",
+      "Watch for summer heat stress in dogwoods (Cornus spp.). Extra watering helps. Some leaf drop in red buckeye (Aesculus pavia) is normal in summer drought.",
+      "Trim back any ground cover, grasses, or vegetation overhanging curbs or sidewalks.",
+      "Inspect plants for aster yellows virus, which affects coneflowers, blazingstars, and black-eyed susans. Remove entire diseased plants and dispose in trash.",
+      "Early summer-blooming shrubs can be pruned after they finish blooming.",
+      "Plant mildews on natives like wild bergamot (Monarda fistulosa) are not necessarily fatal — monitor but don't panic."
+    ],
+    fall: [
+      "Weed as needed — by fall, as the landscape establishes, weeds should diminish significantly.",
+      "Leave seeds and fruits on native plants like blazingstar, coneflower, and beautyberry through fall and winter as food and shelter for birds.",
+      "Leave spent vegetation standing for winter interest and to provide seeds and shelter for birds and other animals.",
+      "If trimming spent vegetation, cut to 8–24 inches tall rather than flush to the ground, so native bees can lay eggs in the stems next season.",
+      "Mid-September through November is a good time to plant native perennials and grasses. Water them in well after planting.",
+      "Mulch to a depth of 2–3 inches, keeping mulch off plant crowns. For trees and shrubs, mulch 3–4 inches deep in a "donut" around the trunk.",
+      "September through October is a good time to divide and move perennials and grasses.",
+      "Clean out bluebird and other bird houses in fall or winter.",
+      "November 15 to March 15 is the best time to prune most trees and shrubs — remove crossing, crowded, or dead branches and double leaders."
+    ],
+    winter: [
+      "In late February to early March, trim dead sedge foliage before plants leaf out in early spring.",
+      "Continue watering newly planted trees and shrubs during winter drought. Root systems keep growing until the ground freezes solid.",
+      "If a week passes without at least 1 inch of precipitation, soak the soil around each newly planted shrub and tree for 10–20 seconds per plant.",
+      "Continue pruning trees, shrubs, and woody vines through late March — maintain aesthetics, rejuvenate growth, and remove dead or crossing branches.",
+      "Never prune more than 25% of live growth at one time, or it could prove fatal to the plant.",
+      "Leaving grasses and herbaceous perennials standing through winter provides cover, food, and nesting material for wildlife.",
+      "Brush piles and stumps provide habitat for many overwintering creatures — consider leaving some in an inconspicuous corner.",
+      "Most bare-rooted trees and shrubs should be planted in February or early March.",
+      "Winter sun, wind, and cold can bleach evergreen foliage and damage bark. Salt used for de-icing is harmful to landscape plants — use sand where possible.",
+      "Protect young trees and sensitive plants from deer and rodent herbivory — food shortages force animals to feed on bark, twigs, and flower buds."
+    ]
+  };
+
+  function getSeason() {
+    var m = new Date().getMonth(); // 0-11
+    if (m >= 2 && m <= 4) return 'spring';
+    if (m >= 5 && m <= 7) return 'summer';
+    if (m >= 8 && m <= 10) return 'fall';
+    return 'winter';
+  }
+
+  function init() {
+    var container = document.getElementById('seasonal-ticker');
+    if (!container) return;
+
+    var season = getSeason();
+    var list = tips[season];
+    var label = container.querySelector('.ticker-season');
+    var slide = container.querySelector('.ticker-slide');
+
+    if (label) label.textContent = season.charAt(0).toUpperCase() + season.slice(1);
+
+    var idx = 0;
+
+    function show(i) {
+      slide.classList.remove('ticker-in');
+      slide.classList.add('ticker-out');
+      setTimeout(function () {
+        slide.textContent = list[i];
+        slide.classList.remove('ticker-out');
+        slide.classList.add('ticker-in');
+      }, 400);
+    }
+
+    slide.textContent = list[0];
+    slide.classList.add('ticker-in');
+
+    setInterval(function () {
+      idx = (idx + 1) % list.length;
+      show(idx);
+    }, 7000);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();

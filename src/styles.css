@@ -362,19 +362,47 @@ form.request-form button {
 footer.site-footer {
   border-top: 3px solid var(--color-forest-dark);
   background: var(--color-bg-raised);
-  padding: var(--space-3) 0;
   margin-top: var(--space-5);
+  overflow: hidden;
 }
 
-footer.site-footer .wrap {
+.seasonal-ticker {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
+  align-items: baseline;
   gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  min-height: 3.5rem;
 }
 
-footer.site-footer .mono { color: var(--color-ink-soft); }
+.ticker-season {
+  flex-shrink: 0;
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-rust);
+}
+
+.ticker-slide {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  color: var(--color-ink-soft);
+  line-height: 1.5;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.ticker-slide.ticker-out {
+  opacity: 0;
+  transform: translateX(-1.5rem);
+}
+
+.ticker-slide.ticker-in {
+  opacity: 1;
+  transform: translateX(0);
+}
 
 /* ---------- Responsive ---------- */
 
