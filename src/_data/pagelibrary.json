@@ -1,10 +1,10 @@
 {
   "eyebrow": "Library",
-  "headline": "A small collection, by request",
-  "lede": "Field guides, naturalist references, and a few books on how people relate to local nature — shared with people who are interested in looking more carefully at the spaces around them. Access is by request and reviewed individually.",
-  "access_status": "Access not yet open",
+  "headline": "Neighborhood Libary",
+  "lede": "A little library for the neighborhood.",
+  "access_status": "Now Accepting Requests",
   "form_title": "Request an invite",
-  "form_description": "Tell me a little about yourself and what draws you to local nature. I read every request personally — once approved, I'll set up access and send it your way.",
+  "form_description": "Tell me what books you are looking for and what cross streets you live on. once approved, I'll set up access and send it your way.",
   "form_success": "Request sent — I'll be in touch.",
   "form_error": "Something went wrong. Please try again."
 }
