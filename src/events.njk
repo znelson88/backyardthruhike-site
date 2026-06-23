@@ -22,6 +22,9 @@ permalink: /events/
     <div class="card-grid">
       {% for event in pageevents.events %}
       <article class="card">
+        {% if event.image %}
+        <img class="card-image" src="{{ event.image }}" alt="{{ event.image_alt or '' }}">
+        {% endif %}
         <span class="mono">{{ event.date }}{% if event.location %} &middot; {{ event.location }}{% endif %}</span>
         <h3>{{ event.title }}</h3>
         <p>{{ event.description }}</p>

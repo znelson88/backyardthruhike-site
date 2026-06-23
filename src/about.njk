@@ -19,6 +19,11 @@ permalink: /about/
 <main>
   <section class="wrap">
     <div style="max-width: 65ch;">
+      {% if pageabout.hero_image %}
+      <div class="page-image-wrap">
+        <img class="page-image" src="{{ pageabout.hero_image }}" alt="{{ pageabout.hero_image_alt or '' }}">
+      </div>
+      {% endif %}
       {{ pageabout.body | safe }}
     </div>
   </section>

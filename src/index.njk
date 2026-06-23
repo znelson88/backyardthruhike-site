@@ -18,6 +18,11 @@ title: Home
       <a class="btn" href="{{ homepage.cta_primary_url }}">{{ homepage.cta_primary_label }}</a>
       <a class="btn btn-outline" href="{{ homepage.cta_secondary_url }}" style="margin-left: 0.75rem;">{{ homepage.cta_secondary_label }}</a>
     </p>
+    {% if homepage.hero_image %}
+    <div class="page-image-wrap" style="margin-top: var(--space-4); margin-bottom: 0;">
+      <img class="page-image" src="{{ homepage.hero_image }}" alt="{{ homepage.hero_image_alt or '' }}">
+    </div>
+    {% endif %}
   </div>
 </section>
 

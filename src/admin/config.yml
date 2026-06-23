@@ -22,6 +22,8 @@ collections:
         widget: select
         options: ["Observation", "Field note", "Essay", "How-to"]
       - { label: Summary, name: summary, widget: text, hint: "One or two sentences shown on the blog listing and homepage." }
+      - { label: Featured image, name: featured_image, widget: image, required: false, hint: "Shown at the top of the post, above the body." }
+      - { label: Featured image alt text, name: featured_image_alt, widget: string, required: false, hint: "Describe the image for screen readers." }
       - { label: Body, name: body, widget: markdown }
 
   - name: settings
@@ -38,6 +40,8 @@ collections:
           - { label: Primary button URL, name: cta_primary_url, widget: string }
           - { label: Secondary button label, name: cta_secondary_label, widget: string }
           - { label: Secondary button URL, name: cta_secondary_url, widget: string }
+          - { label: Hero image, name: hero_image, widget: image, required: false, hint: "Optional photo shown below the CTA buttons." }
+          - { label: Hero image alt text, name: hero_image_alt, widget: string, required: false, hint: "Describe the image for screen readers." }
       - label: Seasonal Footer Tips
         name: seasonal-tips
         file: src/_data/seasonaltips.json
@@ -89,6 +93,8 @@ collections:
           - { label: Headline, name: headline, widget: string }
           - { label: Lede paragraph, name: lede, widget: text }
           - { label: Body content, name: body, widget: markdown, hint: "Main content below the hero section." }
+          - { label: Hero image, name: hero_image, widget: image, required: false, hint: "Optional photo shown above the body content." }
+          - { label: Hero image alt text, name: hero_image_alt, widget: string, required: false, hint: "Describe the image for screen readers." }
       - label: Events page
         name: pageevents
         file: src/_data/pageevents.json
@@ -105,6 +111,8 @@ collections:
               - { label: Date, name: date, widget: string, hint: "e.g. July 12, 2026" }
               - { label: Location, name: location, widget: string, required: false }
               - { label: Description, name: description, widget: text }
+              - { label: Image, name: image, widget: image, required: false, hint: "Optional photo for this event." }
+              - { label: Image alt text, name: image_alt, widget: string, required: false, hint: "Describe the image for screen readers." }
       - label: Blog page
         name: pageblog
         file: src/_data/pageblog.json

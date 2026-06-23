@@ -13,7 +13,12 @@ layout: base.njk
 </section>
 
 <main>
-  <section class="wrap" style="max-width: 68ch;">
+  {% if featured_image %}
+  <div class="wrap page-image-wrap" style="max-width: 68ch;">
+    <img class="page-image" src="{{ featured_image }}" alt="{{ featured_image_alt or '' }}">
+  </div>
+  {% endif %}
+  <section class="wrap post-body" style="max-width: 68ch;">
     {{ content | safe }}
   </section>
 </main>
