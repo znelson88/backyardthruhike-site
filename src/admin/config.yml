@@ -84,13 +84,6 @@ collections:
           - { label: Eyebrow text, name: eyebrow, widget: string }
           - { label: Headline, name: headline, widget: string }
           - { label: Lede paragraph, name: lede, widget: text }
-      - label: Photos page
-        name: pagephotos
-        file: src/_data/pagephotos.json
-        fields:
-          - { label: Eyebrow text, name: eyebrow, widget: string }
-          - { label: Headline, name: headline, widget: string }
-          - { label: Lede paragraph, name: lede, widget: text }
       - label: Library page
         name: pagelibrary
         file: src/_data/pagelibrary.json
@@ -103,14 +96,3 @@ collections:
           - { label: Form description, name: form_description, widget: text }
           - { label: Success message, name: form_success, widget: string, hint: "Shown after a request is submitted." }
           - { label: Error message, name: form_error, widget: string, hint: "Shown if submission fails." }
-      - label: Photo Gallery
-        name: gallery
-        file: src/_data/gallery.json
-        fields:
-          - label: Photos
-            name: photos
-            widget: list
-            fields:
-              - { label: Image, name: src, widget: image }
-              - { label: Alt text, name: alt, widget: string, hint: "Describe the image for screen readers." }
-              - { label: Caption, name: caption, widget: string }
