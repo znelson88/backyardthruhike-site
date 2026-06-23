@@ -1,6 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <rect width="64" height="64" rx="10" fill="#2F4F3D"/>
+
+  <!-- Trail wedge — tip meets the base of the house -->
   <polygon points="32,48 14,64 50,64" fill="#C7BC9C"/>
+
+  <!-- House outline, no door -->
   <path d="M20,34 L32,20 L44,34 L44,48 L20,48 Z"
         fill="none" stroke="white" stroke-width="2.5"
         stroke-linejoin="round" stroke-linecap="round"/>

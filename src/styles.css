@@ -117,18 +117,12 @@ button:focus-visible {
   text-decoration: none;
 }
 
-.blaze {
-  display: inline-flex;
-  flex-direction: column;
-  width: 12px;
-  height: 22px;
-  border-radius: 2px;
-  overflow: hidden;
+.brand-logo {
+  width: 36px;
+  height: 36px;
   flex-shrink: 0;
+  border-radius: 6px;
 }
-.blaze span { flex: 1; }
-.blaze span:nth-child(1) { background: var(--color-forest); }
-.blaze span:nth-child(2) { background: var(--color-rust); }
 
 .brand-name {
   font-family: var(--font-display);
