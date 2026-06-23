@@ -32,11 +32,12 @@
 {{ content | safe }}
 
 <footer class="site-footer">
-  <div class="wrap">
-    <span class="mono">{{ siteconfig.footer_name }}</span>
-    <span class="mono">{{ siteconfig.footer_url }}</span>
+  <div id="seasonal-ticker" class="seasonal-ticker">
+    <span class="ticker-season"></span>
+    <span class="ticker-slide"></span>
   </div>
 </footer>
 
+<script src="/seasonal-ticker.js"></script>
 </body>
 </html>
