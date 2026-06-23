@@ -4,6 +4,7 @@ eleventyExcludeFromCollections: true
 ---
 (function () {
   var tips = {{ seasonaltips | dump | safe }};
+  var sourceUrl = {{ seasonaltips.source_url | dump | safe }};
 
   function getSeason() {
     var m = new Date().getMonth();
@@ -21,6 +22,12 @@ eleventyExcludeFromCollections: true
     var list = tips[season];
     var label = container.querySelector('.ticker-season');
     var slide = container.querySelector('.ticker-slide');
+
+    if (sourceUrl) {
+      container.setAttribute('href', sourceUrl);
+      container.setAttribute('target', '_blank');
+      container.setAttribute('rel', 'noopener noreferrer');
+    }
 
     if (label) label.textContent = season.charAt(0).toUpperCase() + season.slice(1);
 

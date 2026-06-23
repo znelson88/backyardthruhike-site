@@ -42,6 +42,10 @@ collections:
         name: seasonal-tips
         file: src/_data/seasonaltips.json
         fields:
+          - label: Source URL
+            name: source_url
+            widget: string
+            hint: "Link applied to the entire footer ticker — visitors who click it will be taken to this page."
           - label: Spring tips
             name: spring
             widget: list
