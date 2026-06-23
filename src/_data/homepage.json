@@ -5,5 +5,6 @@
   "cta_primary_label": "Read the journal",
   "cta_primary_url": "/blog/",
   "cta_secondary_label": "Corner Library",
-  "cta_secondary_url": "/library/"
+  "cta_secondary_url": "/library/",
+  "hero_image": ""
 }
