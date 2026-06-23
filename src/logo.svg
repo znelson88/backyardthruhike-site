@@ -1,98 +1,11 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Backyard Thru Hike — a winding trail leading to a cabin">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="10" fill="#2F4F3D"/>
 
-  <!-- Background: sky -->
-  <rect width="100" height="100" rx="10" fill="#5F8696"/>
+  <!-- Trail wedge — tip meets the base of the house -->
+  <polygon points="32,48 14,64 50,64" fill="#C7BC9C"/>
 
-  <!-- Sky gradient fill -->
-  <defs>
-    <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#7aa8b8"/>
-      <stop offset="100%" stop-color="#5F8696"/>
-    </linearGradient>
-    <clipPath id="rounded">
-      <rect width="100" height="100" rx="10"/>
-    </clipPath>
-  </defs>
-
-  <rect width="100" height="100" rx="10" fill="url(#sky)"/>
-
-  <!-- All content clipped to rounded rect -->
-  <g clip-path="url(#rounded)">
-
-    <!-- Far mountain range (lighter, distant) -->
-    <polygon points="-10,62 15,35 40,62" fill="#4a7a8a"/>
-    <polygon points="20,62 48,28 76,62" fill="#426d7c"/>
-    <polygon points="55,62 80,32 105,62" fill="#4a7a8a"/>
-
-    <!-- Ground / meadow -->
-    <rect x="0" y="60" width="100" height="40" fill="#3a5e49"/>
-    <!-- Ground highlight curve -->
-    <ellipse cx="50" cy="60" rx="60" ry="6" fill="#3d6652"/>
-
-    <!-- Near tree line (dark silhouettes) -->
-    <!-- Left cluster -->
-    <polygon points="-2,62 10,38 22,62" fill="#233C2E"/>
-    <polygon points="3,62 13,44 23,62"  fill="#2F4F3D"/>
-    <polygon points="14,62 24,40 34,62" fill="#233C2E"/>
-
-    <!-- Right cluster -->
-    <polygon points="66,62 76,40 86,62" fill="#233C2E"/>
-    <polygon points="77,62 87,44 97,62" fill="#2F4F3D"/>
-    <polygon points="88,62 98,38 108,62" fill="#233C2E"/>
-
-    <!-- Cabin -->
-    <!-- Chimney (behind roof) -->
-    <rect x="60" y="34" width="5" height="11" rx="1" fill="#8a6040"/>
-
-    <!-- Roof -->
-    <polygon points="28,50 50,33 72,50" fill="#C1542C"/>
-    <!-- Roof shadow underside -->
-    <polygon points="28,50 50,33 72,50 72,52 50,35 28,52" fill="#9e4020"/>
-
-    <!-- Cabin walls -->
-    <rect x="31" y="49" width="38" height="22" fill="#EFEAD8"/>
-
-    <!-- Left window -->
-    <rect x="34" y="53" width="9" height="7" rx="1" fill="#5F8696"/>
-    <line x1="38.5" y1="53" x2="38.5" y2="60" stroke="#EFEAD8" stroke-width="1"/>
-    <line x1="34" y1="56.5" x2="43" y2="56.5" stroke="#EFEAD8" stroke-width="1"/>
-
-    <!-- Door -->
-    <rect x="44" y="57" width="10" height="14" rx="1" fill="#6B4C30"/>
-    <!-- Door knob -->
-    <circle cx="52" cy="65" r="1" fill="#C7BC9C"/>
-
-    <!-- Right window -->
-    <rect x="57" y="53" width="9" height="7" rx="1" fill="#5F8696"/>
-    <line x1="61.5" y1="53" x2="61.5" y2="60" stroke="#EFEAD8" stroke-width="1"/>
-    <line x1="57" y1="56.5" x2="66" y2="56.5" stroke="#EFEAD8" stroke-width="1"/>
-
-    <!-- Chimney smoke wisps -->
-    <path d="M62,33 Q65,28 62,24 Q59,20 62,16" stroke="#d0dde3" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.6"/>
-    <path d="M64,33 Q67,29 64,26" stroke="#d0dde3" stroke-width="1" fill="none" stroke-linecap="round" opacity="0.4"/>
-
-    <!-- Winding trail — S-curve from bottom center up to cabin door -->
-    <path d="M49,100 C46,90 55,83 50,74 C45,65 54,60 49,57"
-          stroke="#C7BC9C" stroke-width="6" fill="none"
-          stroke-linecap="round" stroke-linejoin="round"/>
-    <!-- Trail edges (subtle depth) -->
-    <path d="M49,100 C46,90 55,83 50,74 C45,65 54,60 49,57"
-          stroke="#b0a880" stroke-width="7" fill="none"
-          stroke-linecap="round" stroke-linejoin="round"
-          opacity="0.3"/>
-
-    <!-- Footstep dots on trail -->
-    <circle cx="47" cy="93" r="1.8" fill="#b8aa7a" opacity="0.75"/>
-    <circle cx="51" cy="86" r="1.8" fill="#b8aa7a" opacity="0.75"/>
-    <circle cx="48" cy="78" r="1.8" fill="#b8aa7a" opacity="0.70"/>
-    <circle cx="52" cy="70" r="1.8" fill="#b8aa7a" opacity="0.65"/>
-    <circle cx="49" cy="63" r="1.8" fill="#b8aa7a" opacity="0.60"/>
-
-    <!-- Ground grass tufts near base -->
-    <path d="M20,68 Q21,64 22,68" stroke="#2a4a38" stroke-width="1.2" fill="none"/>
-    <path d="M25,66 Q26,62 27,66" stroke="#2a4a38" stroke-width="1.2" fill="none"/>
-    <path d="M73,66 Q74,62 75,66" stroke="#2a4a38" stroke-width="1.2" fill="none"/>
-    <path d="M78,68 Q79,64 80,68" stroke="#2a4a38" stroke-width="1.2" fill="none"/>
-
-  </g>
+  <!-- House outline, no door -->
+  <path d="M20,34 L32,20 L44,34 L44,48 L20,48 Z"
+        fill="none" stroke="white" stroke-width="2.5"
+        stroke-linejoin="round" stroke-linecap="round"/>
 </svg>

@@ -1,36 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <defs>
-    <clipPath id="r">
-      <rect width="32" height="32" rx="6"/>
-    </clipPath>
-  </defs>
-
-  <!-- Sky background -->
-  <rect width="32" height="32" rx="6" fill="#5F8696"/>
-
-  <g clip-path="url(#r)">
-    <!-- Mountain silhouette -->
-    <polygon points="-2,20 9,8 20,20" fill="#4a7a8a"/>
-    <polygon points="12,20 22,5 32,20" fill="#426d7c"/>
-
-    <!-- Ground -->
-    <rect x="0" y="19" width="32" height="13" fill="#3a5e49"/>
-
-    <!-- Left tree -->
-    <polygon points="1,20 6,10 11,20"  fill="#233C2E"/>
-    <!-- Right tree -->
-    <polygon points="21,20 26,10 31,20" fill="#233C2E"/>
-
-    <!-- Cabin roof -->
-    <polygon points="9,17 16,11 23,17" fill="#C1542C"/>
-    <!-- Cabin walls -->
-    <rect x="10" y="16" width="12" height="7" fill="#EFEAD8"/>
-    <!-- Door -->
-    <rect x="13" y="18" width="4" height="5" fill="#6B4C30"/>
-
-    <!-- Trail -->
-    <path d="M16,32 C14,28 18,25 16,21 C14,18 16,17 16,17"
-          stroke="#C7BC9C" stroke-width="2.5" fill="none"
-          stroke-linecap="round"/>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" rx="10" fill="#2F4F3D"/>
+  <polygon points="32,48 14,64 50,64" fill="#C7BC9C"/>
+  <path d="M20,34 L32,20 L44,34 L44,48 L20,48 Z"
+        fill="none" stroke="white" stroke-width="2.5"
+        stroke-linejoin="round" stroke-linecap="round"/>
 </svg>
