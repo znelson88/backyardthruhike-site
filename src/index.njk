@@ -3,7 +3,7 @@ layout: base.njk
 title: Home
 ---
 
-<section class="hero">
+<section class="hero"{% if homepage.hero_bg_color %} style="background:{{ homepage.hero_bg_color }}"{% endif %}>
   <svg class="contours" viewBox="0 0 1080 360" preserveAspectRatio="none" aria-hidden="true">
     <path d="M-20,300 C150,260 250,340 400,290 C550,240 650,310 820,270 C950,240 1000,280 1100,250" fill="none" stroke="#C7BC9C" stroke-width="2"/>
     <path d="M-20,330 C150,290 250,370 400,320 C550,270 650,340 820,300 C950,270 1000,310 1100,280" fill="none" stroke="#C7BC9C" stroke-width="2"/>
