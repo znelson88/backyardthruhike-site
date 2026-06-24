@@ -1,11 +1,11 @@
 {
-  "eyebrow": "Summer 2026",
-  "headline": "The National Park in your Backyard",
-  "lede": "Dedicated to the people of Plattsburg,  Make your own national park. ",
-  "cta_primary_label": "Read the journal",
   "cta_primary_url": "/blog/",
-  "cta_secondary_label": "Corner Library",
+  "cta_primary_label": "Read the journal",
+  "eyebrow": "Summer 2026",
+  "hero_bg_color": "",
+  "headline": "The National Park in your Backyard",
   "cta_secondary_url": "/library/",
-  "hero_image": "/images/img_2387.jpg",
-  "hero_bg_color": ""
+  "hero_image": "",
+  "cta_secondary_label": "Corner Library",
+  "lede": "Dedicated to the people of Plattsburg,  Make your own national park. "
 }
