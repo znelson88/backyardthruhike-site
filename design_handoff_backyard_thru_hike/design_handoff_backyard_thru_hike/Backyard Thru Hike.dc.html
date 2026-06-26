@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <script src="image-slot.js"></script>
+  <style>
+    *{ box-sizing:border-box; margin:0; padding:0; }
+    body{ font-family:'Inter',system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
+    a{ color:inherit; text-decoration:none; }
+    @keyframes bthFade{ from{ opacity:0; transform:translateY(4px); } to{ opacity:1; transform:translateY(0); } }
+    @keyframes bthDrift{ from{ transform:translateX(0); } to{ transform:translateX(-14px); } }
+  </style>
+</helmet>
+
+<div style="{{ themeVars }}">
+<div style="position:relative; background:var(--bg,#EFEAD8); color:var(--ink,#26302A); min-height:100vh; width:100%; overflow-x:hidden;">
+
+  <sc-if value="{{ showTexture }}" hint-placeholder-val="{{ true }}">
+    <div style="position:absolute; inset:0; z-index:0; pointer-events:none; background-image:repeating-linear-gradient(180deg, transparent 0px, transparent 31px, rgba(47,79,61,0.05) 31px, rgba(47,79,61,0.05) 32px);"></div>
+  </sc-if>
+
+  <div style="position:relative; z-index:1;">
+
+  <!-- ===================== HEADER ===================== -->
+  <header id="top" style="position:sticky; top:0; z-index:60; backdrop-filter:blur(8px); background:color-mix(in srgb, var(--bg,#EFEAD8) 86%, transparent); border-bottom:1px solid color-mix(in srgb, var(--green,#2F4F3D) 22%, transparent);">
+    <div style="max-width:1200px; margin:0 auto; padding:14px 28px; display:flex; align-items:center; justify-content:space-between; gap:24px;">
+      <a href="#top" style="display:flex; align-items:center; gap:12px;">
+        <span style="width:26px; height:26px; flex:0 0 auto; transform:rotate(45deg); background:var(--green,#2F4F3D); border-radius:5px; display:inline-flex; align-items:center; justify-content:center;">
+          <span style="width:9px; height:9px; transform:rotate(-45deg); border:1.5px solid var(--bg,#EFEAD8); border-radius:2px;"></span>
+        </span>
+        <span style="display:flex; flex-direction:column; line-height:1;">
+          <span style="font-family:'Zilla Slab',serif; font-weight:700; font-size:19px; letter-spacing:-0.01em; color:var(--ink,#26302A);">Backyard Thru&#8209;Hike</span>
+          <span style="font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:0.32em; color:var(--accent,#C1542C); margin-top:4px;">GET OUTSIDE</span>
+        </span>
+      </a>
+
+      <sc-if value="{{ showDesktopNav }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex; align-items:center; gap:28px;">
+          <nav style="display:flex; gap:24px;">
+            <a href="#top" style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:0.08em; color:var(--ink,#26302A);" style-hover="color:var(--accent,#C1542C);">Home</a>
+            <a href="#journal" style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:0.08em; color:var(--ink,#26302A);" style-hover="color:var(--accent,#C1542C);">Journal</a>
+            <a href="#about" style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:0.08em; color:var(--ink,#26302A);" style-hover="color:var(--accent,#C1542C);">About</a>
+            <a href="#library" style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:0.08em; color:var(--ink,#26302A);" style-hover="color:var(--accent,#C1542C);">Corner Library</a>
+          </nav>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ showMobileNav }}" hint-placeholder-val="{{ false }}">
+        <button onClick="{{ toggleMenu }}" aria-label="Menu" style="display:inline-flex; flex-direction:column; gap:5px; padding:10px; background:transparent; border:none; cursor:pointer;">
+          <span style="width:24px; height:2px; background:var(--ink,#26302A);"></span>
+          <span style="width:24px; height:2px; background:var(--ink,#26302A);"></span>
+          <span style="width:24px; height:2px; background:var(--ink,#26302A);"></span>
+        </button>
+      </sc-if>
+    </div>
+
+    <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+      <div style="border-top:1px solid color-mix(in srgb, var(--green,#2F4F3D) 18%, transparent); background:var(--bg,#EFEAD8); padding:8px 28px 22px;">
+        <nav style="display:flex; flex-direction:column;">
+          <a href="#top" onClick="{{ closeMenu }}" style="font-family:'JetBrains Mono',monospace; font-size:14px; letter-spacing:0.06em; padding:13px 0; border-bottom:1px solid rgba(47,79,61,0.1);">Home</a>
+          <a href="#journal" onClick="{{ closeMenu }}" style="font-family:'JetBrains Mono',monospace; font-size:14px; letter-spacing:0.06em; padding:13px 0; border-bottom:1px solid rgba(47,79,61,0.1);">Journal</a>
+          <a href="#about" onClick="{{ closeMenu }}" style="font-family:'JetBrains Mono',monospace; font-size:14px; letter-spacing:0.06em; padding:13px 0; border-bottom:1px solid rgba(47,79,61,0.1);">About</a>
+          <a href="#library" onClick="{{ closeMenu }}" style="font-family:'JetBrains Mono',monospace; font-size:14px; letter-spacing:0.06em; padding:13px 0; border-bottom:1px solid rgba(47,79,61,0.1);">Corner Library</a>
+        </nav>
+      </div>
+    </sc-if>
+  </header>
+
+  <!-- ===================== HERO ===================== -->
+  <section style="position:relative; min-height:clamp(580px, 90vh, 840px); display:flex; align-items:flex-start; overflow:hidden;">
+    <svg viewBox="0 0 1440 760" preserveAspectRatio="xMidYMax slice" style="position:absolute; inset:0; width:100%; height:100%;">
+      <defs>
+        <linearGradient id="bthSky" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" style="stop-color:var(--sky-top,#F6ECCB)"></stop>
+          <stop offset="1" style="stop-color:var(--sky-bottom,#EBE6CE)"></stop>
+        </linearGradient>
+      </defs>
+      <rect x="0" y="0" width="1440" height="760" fill="url(#bthSky)"></rect>
+      <circle cx="1175" cy="158" r="92" style="fill:var(--sun,#E8B84B)" opacity="0.16"></circle>
+      <circle cx="1175" cy="158" r="56" style="fill:var(--sun,#E8B84B)" opacity="0.9"></circle>
+      <g style="stroke:var(--ridge-near,#4A6B4F)" fill="none" opacity="0.13" stroke-width="1.4">
+        <path d="M-40,250 C 240,200 520,210 760,234 C 1020,260 1260,238 1500,250"></path>
+        <path d="M-40,300 C 260,256 540,266 780,288 C 1040,312 1280,292 1500,302"></path>
+        <path d="M-40,196 C 220,150 480,160 720,182 C 980,206 1240,186 1500,196"></path>
+      </g>
+      <path d="M0,330 C 220,288 380,320 600,300 C 820,280 980,322 1200,302 C 1320,291 1400,312 1440,304 L1440,760 L0,760 Z" style="fill:var(--ridge-far,#9FB39A)"></path>
+      <path d="M0,420 C 240,378 420,420 640,398 C 880,374 1040,422 1260,400 C 1360,389 1410,410 1440,404 L1440,760 L0,760 Z" style="fill:var(--ridge-mid,#6E8F6E)"></path>
+      <path d="M0,512 C 220,478 440,520 680,496 C 920,472 1080,520 1300,498 C 1370,491 1410,506 1440,502 L1440,760 L0,760 Z" style="fill:var(--ridge-near,#4A6B4F)"></path>
+      <path d="M0,604 C 260,576 480,612 720,590 C 960,568 1160,612 1380,592 L1440,600 L1440,760 L0,760 Z" style="fill:var(--ridge-fore,#2F4F3D)"></path>
+    </svg>
+
+    <div style="position:relative; z-index:2; max-width:1200px; margin:0 auto; width:100%; padding:clamp(70px,11vh,128px) 28px 60px;">
+      <div style="max-width:720px;">
+        <div style="display:inline-flex; align-items:center; gap:8px; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.22em; color:var(--green,#2F4F3D); background:color-mix(in srgb, var(--bg,#EFEAD8) 70%, transparent); padding:6px 12px; border-radius:999px; border:1px solid color-mix(in srgb,var(--green,#2F4F3D) 22%, transparent);">
+          <span style="width:6px; height:6px; border-radius:50%; background:var(--accent,#C1542C);"></span>
+          PLATTSBURG, MO &middot; 39.5656&deg;N
+        </div>
+        <h1 style="font-family:'Zilla Slab',serif; font-weight:700; font-size:clamp(2.7rem,6.2vw,5rem); line-height:0.98; letter-spacing:-0.02em; color:var(--ink,#26302A); margin-top:22px; text-wrap:balance;">
+          Find the trail in your own backyard.
+        </h1>
+        <p style="font-family:'Inter',sans-serif; font-size:clamp(1.05rem,1.7vw,1.3rem); line-height:1.55; color:var(--ink-soft,#4c5249); margin-top:22px; max-width:560px; text-wrap:pretty;">
+          A field journal and lending library for the people of Plattsburg &mdash; for anyone who wants to find a little wildness in the ordinary ground underfoot. No summit required.
+        </p>
+        <div style="display:flex; flex-wrap:wrap; gap:14px; margin-top:34px;">
+          <a href="#journal" style="display:inline-flex; align-items:center; gap:9px; font-family:'JetBrains Mono',monospace; font-size:13px; letter-spacing:0.05em; font-weight:500; background:var(--accent,#C1542C); color:#FBF6E9; padding:14px 22px; border-radius:8px; box-shadow:0 6px 16px -8px rgba(0,0,0,0.4);" style-hover="filter:brightness(1.07);">
+            Read the Journal &rarr;
+          </a>
+          <a href="#library" style="display:inline-flex; align-items:center; font-family:'JetBrains Mono',monospace; font-size:13px; letter-spacing:0.05em; font-weight:500; color:var(--green,#2F4F3D); padding:14px 22px; border-radius:8px; border:1.5px solid var(--green,#2F4F3D); background:color-mix(in srgb, var(--bg,#EFEAD8) 55%, transparent);" style-hover="background:color-mix(in srgb,var(--green,#2F4F3D) 10%, var(--bg,#EFEAD8));">
+            Visit the Corner Library
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== ELEVATION DIVIDER ===================== -->
+  <div style="background:var(--ridge-fore,#2F4F3D); line-height:0;">
+    <svg viewBox="0 0 1440 70" preserveAspectRatio="none" style="display:block; width:100%; height:62px;">
+      <path d="M0,52 L120,40 L210,58 L320,30 L430,46 L560,18 L660,42 L790,26 L920,50 L1030,32 L1160,54 L1280,36 L1380,52 L1440,42 L1440,70 L0,70 Z" style="fill:var(--accent,#C1542C)"></path>
+      <path d="M0,52 L120,40 L210,58 L320,30 L430,46 L560,18 L660,42 L790,26 L920,50 L1030,32 L1160,54 L1280,36 L1380,52 L1440,42" fill="none" style="stroke:var(--accent,#C1542C)" stroke-width="2" opacity="0.55"></path>
+    </svg>
+  </div>
+
+  <!-- ===================== JOURNAL ===================== -->
+  <section id="journal" style="max-width:1200px; margin:0 auto; padding:clamp(56px,8vw,96px) 28px;">
+    <div style="display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:16px; margin-bottom:40px;">
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.26em; color:var(--accent,#C1542C); margin-bottom:12px;">FIELD JOURNAL</div>
+        <h2 style="font-family:'Zilla Slab',serif; font-weight:700; font-size:clamp(1.9rem,3.6vw,2.9rem); line-height:1.02; letter-spacing:-0.015em; color:var(--ink,#26302A);">Lately, on the trail</h2>
+      </div>
+      <a href="#journal" style="font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:0.06em; color:var(--green,#2F4F3D); border-bottom:1.5px solid var(--accent,#C1542C); padding-bottom:3px;" style-hover="color:var(--accent,#C1542C);">All entries &rarr;</a>
+    </div>
+
+    <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(290px,1fr)); gap:26px;">
+      <sc-for list="{{ posts }}" as="post" hint-placeholder-count="3">
+        <article style="display:flex; flex-direction:column; background:var(--card,#F5F1E3); border:1px solid rgba(47,79,61,0.12); border-left:4px solid var(--green,#2F4F3D); border-radius:4px; overflow:hidden; box-shadow:0 10px 26px -22px rgba(38,48,42,0.7);">
+          <div style="position:relative; height:188px; background:repeating-linear-gradient(135deg, rgba(47,79,61,0.06) 0 10px, rgba(47,79,61,0.11) 10px 20px); display:flex; align-items:center; justify-content:center;">
+            <x-import component-from-global-scope="image-slot" from="./image-slot.js" id="{{ post.slotId }}" shape="rect" placeholder="{{ post.slotLabel }}" style="width:100%; height:100%; display:block;" hint-size="100%,188px"></x-import>
+          </div>
+          <div style="padding:20px 20px 22px; display:flex; flex-direction:column; flex:1;">
+            <div style="display:flex; flex-wrap:wrap; gap:7px; margin-bottom:13px;">
+              <sc-for list="{{ post.tags }}" as="tag" hint-placeholder-count="2">
+                <span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.1em; color:var(--slate,#5F8696); border:1px solid color-mix(in srgb, var(--slate,#5F8696) 40%, transparent); padding:3px 8px; border-radius:4px;">{{ tag }}</span>
+              </sc-for>
+            </div>
+            <h3 style="font-family:'Zilla Slab',serif; font-weight:600; font-size:1.32rem; line-height:1.12; letter-spacing:-0.01em; color:var(--ink,#26302A);">{{ post.title }}</h3>
+            <p style="font-family:'Inter',sans-serif; font-size:0.95rem; line-height:1.55; color:var(--ink-soft,#5a5f54); margin-top:10px; flex:1; text-wrap:pretty;">{{ post.excerpt }}</p>
+            <div style="display:flex; align-items:center; gap:10px; margin-top:18px; padding-top:14px; border-top:1px solid rgba(47,79,61,0.1); font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:0.08em; color:var(--ink-soft,#6b7066);">
+              <span>{{ post.date }}</span>
+              <span style="opacity:0.4;">&bull;</span>
+              <span>{{ post.read }}</span>
+            </div>
+          </div>
+        </article>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- ===================== CORNER LIBRARY ===================== -->
+  <section id="library" style="background:color-mix(in srgb, var(--green,#2F4F3D) 9%, var(--bg,#EFEAD8)); border-top:1px solid rgba(47,79,61,0.12); border-bottom:1px solid rgba(47,79,61,0.12);">
+    <div style="max-width:1200px; margin:0 auto; padding:clamp(56px,8vw,96px) 28px; display:grid; grid-template-columns:repeat(auto-fit, minmax(320px,1fr)); gap:48px; align-items:center;">
+      <div style="position:relative;">
+        <div style="position:absolute; inset:-10px -10px auto auto; width:84px; height:84px; transform:rotate(8deg); background:var(--accent,#C1542C); color:#FBF6E9; border-radius:50%; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:0.1em; line-height:1.4; box-shadow:0 8px 18px -8px rgba(0,0,0,0.45); z-index:2;">FREE<br>TO<br>BORROW</div>
+        <x-import component-from-global-scope="image-slot" from="./image-slot.js" id="bth-library-shelf" shape="rounded" radius="10" placeholder="gear shelf photo" style="width:100%; height:clamp(280px,34vw,400px); display:block; border:1px solid rgba(47,79,61,0.18);" hint-size="100%,360px"></x-import>
+      </div>
+      <div>
+        <div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.26em; color:var(--accent,#C1542C); margin-bottom:14px;">THE CORNER LIBRARY</div>
+        <h2 style="font-family:'Zilla Slab',serif; font-weight:700; font-size:clamp(1.9rem,3.6vw,2.8rem); line-height:1.04; letter-spacing:-0.015em; color:var(--ink,#26302A);">Borrow what you need.<br>Return it when you're done.</h2>
+        <p style="font-family:'Inter',sans-serif; font-size:1.05rem; line-height:1.6; color:var(--ink-soft,#5a5f54); margin-top:18px; max-width:480px; text-wrap:pretty;">A shelf of shared gear and well-worn field guides, kept in the front room just off the square downtown. Take a pack for the weekend, a guidebook for the season &mdash; leave it better than you found it.</p>
+        <div style="margin-top:26px; display:flex; flex-direction:column; gap:2px; border:1px solid rgba(47,79,61,0.14); border-radius:8px; overflow:hidden; background:var(--card,#F5F1E3);">
+          <sc-for list="{{ libraryItems }}" as="item" hint-placeholder-count="4">
+            <div style="display:flex; align-items:center; justify-content:space-between; gap:16px; padding:14px 18px; border-bottom:1px solid rgba(47,79,61,0.09);">
+              <span style="font-family:'Inter',sans-serif; font-weight:500; font-size:0.98rem; color:var(--ink,#26302A);">{{ item.name }}</span>
+              <span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.08em; padding:4px 9px; border-radius:999px; white-space:nowrap; background:{{ item.statusBg }}; color:{{ item.statusFg }};">{{ item.status }}</span>
+            </div>
+          </sc-for>
+        </div>
+        <div style="display:flex; flex-wrap:wrap; align-items:center; gap:16px; margin-top:24px;">
+          <a href="#library" style="display:inline-flex; align-items:center; gap:8px; font-family:'JetBrains Mono',monospace; font-size:13px; letter-spacing:0.05em; font-weight:500; background:var(--green,#2F4F3D); color:#FBF6E9; padding:13px 22px; border-radius:8px;" style-hover="filter:brightness(1.1);">Browse the full library &rarr;</a>
+          <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.04em; color:var(--ink-soft,#6b7066);">or drop a request in the box on the square.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== ABOUT / DEDICATION ===================== -->
+  <section id="about" style="max-width:760px; margin:0 auto; padding:clamp(60px,9vw,110px) 28px; text-align:center;">
+    <div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.26em; color:var(--slate,#5F8696); margin-bottom:20px;">FIELD NOTES &middot; EST. 2026</div>
+    <p style="font-family:'Zilla Slab',serif; font-weight:500; font-style:italic; font-size:clamp(1.5rem,3vw,2.15rem); line-height:1.3; letter-spacing:-0.01em; color:var(--ink,#26302A); text-wrap:balance;">
+      &ldquo;You don't need a trailhead and a tank of gas. You need ten minutes, a pair of boots, and the willingness to look closely at the ground you already stand on.&rdquo;
+    </p>
+    <div style="margin-top:28px; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.12em; color:var(--ink-soft,#6b7066);">MADE FOR THE PEOPLE OF PLATTSBURG, MO</div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer style="background:var(--ridge-fore,#2F4F3D); color:#E7E2CF;">
+    <div style="display:flex; align-items:center; gap:14px; padding:13px 28px; border-bottom:1px solid rgba(255,255,255,0.12); overflow:hidden;">
+      <span style="flex:0 0 auto; font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.14em; color:var(--bg,#EFEAD8); background:var(--accent,#C1542C); padding:5px 9px; border-radius:4px;">TRAIL TIP</span>
+      <span key="{{ tip }}" style="font-family:'JetBrains Mono',monospace; font-size:12.5px; letter-spacing:0.02em; color:#EDE8D6; animation:bthFade 0.5s ease both; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ tip }}</span>
+    </div>
+    <div style="max-width:1200px; margin:0 auto; padding:clamp(48px,6vw,72px) 28px 30px; display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:40px;">
+      <div style="grid-column:1 / -1; max-width:520px;">
+        <div style="font-family:'Zilla Slab',serif; font-weight:700; font-size:clamp(2.4rem,5vw,3.4rem); line-height:0.95; letter-spacing:-0.02em; color:var(--bg,#EFEAD8);">Get Outside.</div>
+        <p style="font-family:'Inter',sans-serif; font-size:0.98rem; line-height:1.6; color:rgba(231,226,207,0.78); margin-top:16px;">A backyard thru-hike is just a long walk that starts at your own back door. Start one this week.</p>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:11px;">
+        <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.2em; color:rgba(231,226,207,0.5); margin-bottom:4px;">EXPLORE</div>
+        <a href="#top" style="font-family:'Inter',sans-serif; font-size:0.95rem;" style-hover="color:#fff;">Home</a>
+        <a href="#journal" style="font-family:'Inter',sans-serif; font-size:0.95rem;" style-hover="color:#fff;">Journal</a>
+        <a href="#about" style="font-family:'Inter',sans-serif; font-size:0.95rem;" style-hover="color:#fff;">About</a>
+        <a href="#library" style="font-family:'Inter',sans-serif; font-size:0.95rem;" style-hover="color:#fff;">Corner Library</a>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:11px;">
+        <div style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.2em; color:rgba(231,226,207,0.5); margin-bottom:4px;">FIND US</div>
+        <span style="font-family:'Inter',sans-serif; font-size:0.95rem; color:rgba(231,226,207,0.82);">On the courthouse square</span>
+        <span style="font-family:'Inter',sans-serif; font-size:0.95rem; color:rgba(231,226,207,0.82);">Plattsburg, MO 64477</span>
+        <span style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.06em; color:rgba(231,226,207,0.6); margin-top:4px;">39.5656&deg;N, 94.4477&deg;W</span>
+      </div>
+    </div>
+    <div style="max-width:1200px; margin:0 auto; padding:18px 28px 28px; border-top:1px solid rgba(255,255,255,0.12); display:flex; flex-wrap:wrap; justify-content:space-between; gap:10px; font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:0.08em; color:rgba(231,226,207,0.55);">
+      <span>&copy; 2026 BACKYARD THRU-HIKE</span>
+      <span>BACKYARDTHRUHIKE.COM</span>
+    </div>
+  </footer>
+
+  </div>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1280,&quot;height&quot;:900},&quot;season&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;auto&quot;,&quot;summer&quot;,&quot;fall&quot;,&quot;winter&quot;,&quot;spring&quot;],&quot;default&quot;:&quot;auto&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Theme&quot;},&quot;paperTexture&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Theme&quot;},&quot;rotateTips&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Footer&quot;}}">
+class Component extends DCLogic {
+  state = { menuOpen: false, vw: 1200, tipIndex: 0 };
+
+  getSeason() {
+    const p = this.props.season || 'auto';
+    if (p && p !== 'auto') return p;
+    const m = new Date().getMonth() + 1;
+    if (m === 12 || m <= 2) return 'winter';
+    if (m <= 5) return 'spring';
+    if (m <= 8) return 'summer';
+    return 'fall';
+  }
+
+  componentDidMount() {
+    this._onResize = () => this.setState({ vw: window.innerWidth });
+    window.addEventListener('resize', this._onResize);
+    this.setState({ vw: window.innerWidth });
+    this._tip = setInterval(() => this.setState(s => ({ tipIndex: s.tipIndex + 1 })), 5200);
+  }
+  componentWillUnmount() {
+    window.removeEventListener('resize', this._onResize);
+    clearInterval(this._tip);
+  }
+
+  palettes = {
+    summer: {
+      '--bg':'#EFEAD8', '--card':'#F5F1E3', '--ink':'#26302A', '--ink-soft':'#565c4f',
+      '--green':'#2F4F3D', '--rust':'#C1542C', '--slate':'#5F8696', '--accent':'#C1542C',
+      '--sky-top':'#F6ECCB', '--sky-bottom':'#ECE7CB', '--sun':'#E8B84B',
+      '--ridge-far':'#A9BC9C', '--ridge-mid':'#728F66', '--ridge-near':'#4C6B49', '--ridge-fore':'#2F4F3D'
+    },
+    fall: {
+      '--bg':'#ECE3CC', '--card':'#F3EAD2', '--ink':'#2c2a22', '--ink-soft':'#5e5640',
+      '--green':'#4A5536', '--rust':'#B14620', '--slate':'#6E7E7E', '--accent':'#B14620',
+      '--sky-top':'#F4DCB4', '--sky-bottom':'#EBDDBC', '--sun':'#D9702C',
+      '--ridge-far':'#CBA873', '--ridge-mid':'#B0793F', '--ridge-near':'#7C5A2E', '--ridge-fore':'#463822'
+    },
+    winter: {
+      '--bg':'#ECEAE1', '--card':'#F4F2EA', '--ink':'#24292b', '--ink-soft':'#54595c',
+      '--green':'#3C4D55', '--rust':'#A85A3E', '--slate':'#5F8696', '--accent':'#5F8696',
+      '--sky-top':'#DCE4EA', '--sky-bottom':'#E9EAE3', '--sun':'#CBD6DC',
+      '--ridge-far':'#B3C0C7', '--ridge-mid':'#8597A1', '--ridge-near':'#5E7682', '--ridge-fore':'#3B4C54'
+    },
+    spring: {
+      '--bg':'#EFECD9', '--card':'#F5F2E0', '--ink':'#26302A', '--ink-soft':'#54604e',
+      '--green':'#356A3A', '--rust':'#C1542C', '--slate':'#5F8696', '--accent':'#356A3A',
+      '--sky-top':'#E3EBD2', '--sky-bottom':'#ECEDDB', '--sun':'#EBD66E',
+      '--ridge-far':'#B3CC9E', '--ridge-mid':'#7FAE69', '--ridge-near':'#548045', '--ridge-fore':'#34582F'
+    }
+  };
+
+  posts = [
+    {
+      slotId:'bth-post-1', slotLabel:'lake at dawn',
+      tags:['LAKESIDE','EASY'],
+      title:'Smithville Lake at First Light',
+      excerpt:'Out the door by 5:40, fog still sitting on the water. Two herons and a beaver wake — all before the first boat trailer hit the ramp.',
+      date:'JUN 18, 2026', read:'4 MIN READ'
+    },
+    {
+      slotId:'bth-post-2', slotLabel:'backyard map sketch',
+      tags:['BACKYARD','MAPPING'],
+      title:'Three Maples and a Stone Wall',
+      excerpt:'You can survey a quarter-acre like it\'s the Ozark backcountry. Here\'s how I mapped every tree, burrow, and game trail behind the house.',
+      date:'JUN 11, 2026', read:'6 MIN READ'
+    },
+    {
+      slotId:'bth-post-3', slotLabel:'bluff overlook view',
+      tags:['BLUFF','MODERATE'],
+      title:'Smithville Bluffs Before Breakfast',
+      excerpt:'A 1.2-mile loop up the timbered bluffs, done before the lot fills. Smithville Lake laid out flat and silver to the south.',
+      date:'JUN 03, 2026', read:'5 MIN READ'
+    }
+  ];
+
+  libraryItems = [
+    { name:'Osprey Daypack — 28L', status:'AVAILABLE', kind:'in' },
+    { name:'Field Guide: Missouri Wildflowers', status:'AVAILABLE', kind:'in' },
+    { name:'Trekking Poles (pair)', status:'OUT · BACK FRI', kind:'out' },
+    { name:'Two-Person Tent', status:'AVAILABLE', kind:'in' },
+    { name:'Snowshoes — Women\'s M', status:'SEASONAL', kind:'seasonal' }
+  ];
+
+  tipsBySeason = {
+    summer: [
+      'Chiggers love the tall grass by July — tuck your socks in.',
+      'Wild blackberries ripen along the old rail trail by late August.',
+      'Listen for the dickcissel buzzing its name from the fence posts.'
+    ],
+    fall: [
+      'Oak and hickory peak in late October — the bluffs go gold and rust.',
+      'First frost usually lands by mid-October. Cover the late tomatoes.',
+      'Watch for monarchs funneling south through the prairie in September.'
+    ],
+    winter: [
+      'Bald eagles gather below Smithville Dam through January.',
+      'Track prints in new snow: fox tracks run in a near-straight line.',
+      'Thin ice in the lake coves even when the middle looks solid. Stay on the bank.'
+    ],
+    spring: [
+      'Spring ephemerals — trout lily, trillium — bloom before the canopy leafs out.',
+      'Listen for spring peepers in the wet meadows by mid-April.',
+      'Mud season: stick to gravel paths so the trails don\'t rut.'
+    ]
+  };
+
+  renderVals() {
+    const season = this.getSeason();
+    const themeVars = this.palettes[season] || this.palettes.summer;
+    const isMobile = (this.state.vw || 1200) < 880;
+    const showTexture = this.props.paperTexture ?? true;
+    const rotateTips = this.props.rotateTips ?? true;
+
+    const statusStyle = (kind) => {
+      if (kind === 'out') return { bg: 'color-mix(in srgb, var(--rust,#C1542C) 16%, transparent)', fg: 'var(--rust,#C1542C)' };
+      if (kind === 'seasonal') return { bg: 'color-mix(in srgb, var(--slate,#5F8696) 18%, transparent)', fg: 'var(--slate,#5F8696)' };
+      return { bg: 'color-mix(in srgb, var(--green,#2F4F3D) 16%, transparent)', fg: 'var(--green,#2F4F3D)' };
+    };
+    const libraryItems = this.libraryItems.map(it => {
+      const st = statusStyle(it.kind);
+      return { name: it.name, status: it.status, statusBg: st.bg, statusFg: st.fg };
+    });
+
+    const tips = this.tipsBySeason[season] || this.tipsBySeason.summer;
+    const tip = rotateTips ? tips[this.state.tipIndex % tips.length] : tips[0];
+
+    return {
+      themeVars,
+      showDesktopNav: !isMobile,
+      showMobileNav: isMobile,
+      menuOpen: this.state.menuOpen,
+      toggleMenu: () => this.setState(s => ({ menuOpen: !s.menuOpen })),
+      closeMenu: () => this.setState({ menuOpen: false }),
+      showTexture,
+      posts: this.posts,
+      libraryItems,
+      tip
+    };
+  }
+}
+</script>
+</body>
+</html>
