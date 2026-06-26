@@ -1,50 +1,30 @@
 <!doctype html>
-<html lang="en" data-season="{{ season }}">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{% if title and title != "Home" %}{{ title }} — {% endif %}Backyard Thru Hike</title>
-<meta name="description" content="{{ description or 'A field journal and lending library for the people of Plattsburg, Missouri. Get Outside.' }}">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<meta name="description" content="{{ description or 'Backyard Thru Hike — finding the national park in the space you already have.' }}">
 <link rel="stylesheet" href="/styles.css">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 </head>
 <body>
 
-<header id="top" class="site-header">
-  <div class="site-header__bar">
-    <a href="#top" class="brand">
-      <span class="brand-diamond" aria-hidden="true">
-        <span class="brand-diamond__inner"></span>
-      </span>
-      <span class="brand-text">
-        <span class="brand-name">Backyard Thru&#8209;Hike</span>
-        <span class="brand-tagline">GET OUTSIDE</span>
+<header class="site-header">
+  <div class="wrap">
+    <a class="brand" href="/">
+      <img src="/logo.svg" alt="" aria-hidden="true" class="brand-logo" width="36" height="36">
+      <span>
+        <span class="brand-name">{{ siteconfig.brand_name }}</span>
+        <span class="brand-sub">{{ siteconfig.brand_tagline }}</span>
       </span>
     </a>
-
     <nav class="main-nav" aria-label="Primary">
-      <a href="/">Home</a>
-      <a href="#journal">Journal</a>
-      <a href="#about">About</a>
-      <a href="#library">Corner Library</a>
-    </nav>
-
-    <button id="menu-toggle" class="hamburger" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-nav">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-  </div>
-
-  <div id="mobile-nav" class="mobile-nav" hidden>
-    <nav>
-      <a href="/" class="mobile-nav__link">Home</a>
-      <a href="#journal" class="mobile-nav__link">Journal</a>
-      <a href="#about" class="mobile-nav__link">About</a>
-      <a href="#library" class="mobile-nav__link">Corner Library</a>
+      <ul>
+        {% for item in siteconfig.nav %}
+        <li><a href="{{ item.url }}" {% if page.url == item.url or (item.url != "/" and item.url in page.url) %}aria-current="page"{% endif %}>{{ item.label }}</a></li>
+        {% endfor %}
+      </ul>
     </nav>
   </div>
 </header>
@@ -52,41 +32,12 @@
 {{ content | safe }}
 
 <footer class="site-footer">
-  <div class="footer-ticker">
-    <span class="ticker-chip">TRAIL TIP</span>
-    <span id="ticker-text" class="ticker-text"
-      data-tips="{{ seasonaltips[season] | dump }}"
-      data-rotate="true">{{ seasonaltips[season][0] }}</span>
-  </div>
-
-  <div class="footer-main">
-    <div class="footer-wordmark">
-      <div class="footer-get-outside">Get Outside.</div>
-      <p class="footer-blurb">A backyard thru-hike is just a long walk that starts at your own back door. Start one this week.</p>
-    </div>
-
-    <div class="footer-col">
-      <div class="footer-col__label">EXPLORE</div>
-      <a href="/">Home</a>
-      <a href="#journal">Journal</a>
-      <a href="#about">About</a>
-      <a href="#library">Corner Library</a>
-    </div>
-
-    <div class="footer-col">
-      <div class="footer-col__label">FIND US</div>
-      <span>On the courthouse square</span>
-      <span>Plattsburg, MO 64477</span>
-      <span class="footer-coords">39.5656&deg;N, 94.4477&deg;W</span>
-    </div>
-  </div>
-
-  <div class="footer-bottom">
-    <span>&copy; 2026 BACKYARD THRU-HIKE</span>
-    <span>BACKYARDTHRUHIKE.COM</span>
-  </div>
+  <a id="seasonal-ticker" class="seasonal-ticker" href="https://grownative.org/learn/native-landscape-care-calendar/" target="_blank" rel="noopener noreferrer">
+    <span class="ticker-season"></span>
+    <span class="ticker-slide"></span>
+  </a>
 </footer>
 
-<script src="/site.js"></script>
+<script src="/seasonal-ticker.js"></script>
 </body>
 </html>
