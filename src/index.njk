@@ -3,31 +3,119 @@ layout: base.njk
 title: Home
 ---
 
-<section class="hero"{% if homepage.hero_bg_color %} style="background:{{ homepage.hero_bg_color }}"{% endif %}>
-  <svg class="contours" viewBox="0 0 1080 360" preserveAspectRatio="none" aria-hidden="true">
-    <path d="M-20,300 C150,260 250,340 400,290 C550,240 650,310 820,270 C950,240 1000,280 1100,250" fill="none" stroke="#C7BC9C" stroke-width="2"/>
-    <path d="M-20,330 C150,290 250,370 400,320 C550,270 650,340 820,300 C950,270 1000,310 1100,280" fill="none" stroke="#C7BC9C" stroke-width="2"/>
-    <path d="M-20,270 C150,230 250,310 400,260 C550,210 650,280 820,240 C950,210 1000,250 1100,220" fill="none" stroke="#C7BC9C" stroke-width="1.5"/>
-    <path d="M-20,240 C150,200 250,280 400,230 C550,180 650,250 820,210 C950,180 1000,220 1100,190" fill="none" stroke="#C7BC9C" stroke-width="1.5"/>
+{# ── 02 · Hero ── #}
+<section class="bth-hero">
+  <svg class="bth-hero__bg" viewBox="0 0 1440 760" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    <defs>
+      <linearGradient id="bthSky" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="var(--sky-top)"></stop>
+        <stop offset="1" stop-color="var(--sky-bottom)"></stop>
+      </linearGradient>
+    </defs>
+    <rect x="0" y="0" width="1440" height="760" fill="url(#bthSky)"></rect>
+    <circle cx="1175" cy="158" r="92" fill="var(--sun)" opacity="0.16"></circle>
+    <circle cx="1175" cy="158" r="56" fill="var(--sun)" opacity="0.9"></circle>
+    <g stroke="var(--ridge-near)" fill="none" opacity="0.13" stroke-width="1.4">
+      <path d="M-40,250 C 240,200 520,210 760,234 C 1020,260 1260,238 1500,250"></path>
+      <path d="M-40,300 C 260,256 540,266 780,288 C 1040,312 1280,292 1500,302"></path>
+      <path d="M-40,196 C 220,150 480,160 720,182 C 980,206 1240,186 1500,196"></path>
+    </g>
+    <path d="M0,330 C 220,288 380,320 600,300 C 820,280 980,322 1200,302 C 1320,291 1400,312 1440,304 L1440,760 L0,760 Z" fill="var(--ridge-far)"></path>
+    <path d="M0,420 C 240,378 420,420 640,398 C 880,374 1040,422 1260,400 C 1360,389 1410,410 1440,404 L1440,760 L0,760 Z" fill="var(--ridge-mid)"></path>
+    <path d="M0,512 C 220,478 440,520 680,496 C 920,472 1080,520 1300,498 C 1370,491 1410,506 1440,502 L1440,760 L0,760 Z" fill="var(--ridge-near)"></path>
+    <path d="M0,604 C 260,576 480,612 720,590 C 960,568 1160,612 1380,592 L1440,600 L1440,760 L0,760 Z" fill="var(--ridge-fore)"></path>
   </svg>
-  <div class="wrap">
-    <p class="hero-eyebrow">{{ homepage.eyebrow }}</p>
-    <h1>{{ homepage.headline | replace("\n", "<br>") | safe }}</h1>
-    <p class="lede">{{ homepage.lede }}</p>
-    <p style="margin-top: 2rem;">
-      <a class="btn" href="{{ homepage.cta_primary_url }}">{{ homepage.cta_primary_label }}</a>
-      <a class="btn btn-outline" href="{{ homepage.cta_secondary_url }}" style="margin-left: 0.75rem;">{{ homepage.cta_secondary_label }}</a>
-    </p>
-    {% if homepage.hero_image %}
-    <div class="page-image-wrap" style="margin-top: var(--space-4); margin-bottom: 0;">
-      <img class="page-image" src="{{ homepage.hero_image }}" alt="{{ homepage.hero_image_alt or '' }}">
+
+  <div class="bth-hero__inner">
+    <div class="bth-hero__col">
+      <span class="bth-pill"><span class="bth-pill__dot"></span>PLATTSBURGH, NY &middot; 44.6995&deg;N</span>
+      <h1>{{ homepage.headline }}</h1>
+      <p class="bth-hero__lede">{{ homepage.lede }}</p>
+      <div class="bth-cta-row">
+        <a class="bth-btn bth-btn--primary" href="{{ homepage.cta_primary_url }}">{{ homepage.cta_primary_label }} &rarr;</a>
+        <a class="bth-btn bth-btn--outline" href="{{ homepage.cta_secondary_url }}">{{ homepage.cta_secondary_label }}</a>
+      </div>
     </div>
+  </div>
+</section>
+
+{# ── 03 · Elevation divider ── #}
+<div class="bth-divider" aria-hidden="true">
+  <svg viewBox="0 0 1440 70" preserveAspectRatio="none">
+    <path d="M0,52 L120,40 L210,58 L320,30 L430,46 L560,18 L660,42 L790,26 L920,50 L1030,32 L1160,54 L1280,36 L1380,52 L1440,42 L1440,70 L0,70 Z" fill="var(--accent)"></path>
+    <path d="M0,52 L120,40 L210,58 L320,30 L430,46 L560,18 L660,42 L790,26 L920,50 L1030,32 L1160,54 L1280,36 L1380,52 L1440,42" fill="none" stroke="var(--accent)" stroke-width="2" opacity="0.55"></path>
+  </svg>
+</div>
+
+{# ── 04 · Journal cards ── #}
+<section class="bth-section" id="journal">
+  <div class="bth-section__head">
+    <div>
+      <div class="bth-eyebrow">FIELD JOURNAL</div>
+      <h2 class="bth-h2">Lately, on the trail</h2>
+    </div>
+    <a class="bth-seelink" href="/blog/">All entries &rarr;</a>
+  </div>
+
+  <div class="bth-card-grid">
+    {% for post in collections.blog | limit(3) %}
+    <article class="bth-card">
+      {% if post.data.image %}
+      <img class="bth-card__thumb" src="{{ post.data.image }}" alt="{{ post.data.image_alt or '' }}" loading="lazy">
+      {% else %}
+      <div class="bth-card__thumb"></div>
+      {% endif %}
+      <div class="bth-card__body">
+        {% if post.data.tags %}
+        <div class="bth-tags">
+          {% for tag in post.data.tags %}{% if tag != "blog" %}<span class="bth-tag">{{ tag | upper }}</span>{% endif %}{% endfor %}
+        </div>
+        {% endif %}
+        <h3><a href="{{ post.url }}">{{ post.data.title }}</a></h3>
+        <p class="bth-card__excerpt">{{ post.data.summary }}</p>
+        <div class="bth-card__meta">
+          <span>{{ post.date | readableDate | upper }}</span>
+          {% if post.data.type %}<span class="dot">&bull;</span><span>{{ post.data.type | upper }}</span>{% endif %}
+        </div>
+      </div>
+    </article>
+    {% endfor %}
+
+    {% if not collections.blog.length %}
+    <p style="color:var(--ink-soft); font-family:var(--font-mono); font-size:0.85rem; letter-spacing:0.06em; grid-column:1/-1;">
+      No entries yet &mdash; check back soon.
+    </p>
     {% endif %}
   </div>
 </section>
 
-<svg class="elevation-divider wrap" viewBox="0 0 1080 56" preserveAspectRatio="none" aria-hidden="true">
-  <polyline points="0,40 90,30 180,42 270,18 360,34 450,10 540,28 630,16 720,36 810,22 900,30 990,12 1080,26"
-    fill="none" stroke="#C1542C" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
-</svg>
+{# ── 05 · Corner Library preview ── #}
+<section class="bth-library" id="library">
+  <div class="bth-library__inner">
+    <div class="bth-library__media">
+      <div class="bth-badge">FREE<br>TO<br>BORROW</div>
+      <div class="bth-library__photo"></div>
+    </div>
+    <div>
+      <div class="bth-eyebrow">THE CORNER LIBRARY</div>
+      <h2 class="bth-h2">{{ pagelibrary.headline | safe }}</h2>
+      <p class="bth-library__lede">{{ pagelibrary.lede }}</p>
 
+      {% if pagelibrary.items %}
+      <div class="bth-itemlist">
+        {% for item in pagelibrary.items %}
+        <div class="bth-item">
+          <span class="bth-item__name">{{ item.name }}</span>
+          <span class="bth-status bth-status--{{ item.status }}">{{ item.status_label }}</span>
+        </div>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      <div class="bth-library__actions">
+        <a class="bth-btn bth-btn--green" href="/library/">Browse the full library &rarr;</a>
+        <span class="bth-note">{{ pagelibrary.access_status }}</span>
+      </div>
+    </div>
+  </div>
+</section>

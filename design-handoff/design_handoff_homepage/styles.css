@@ -1,0 +1,167 @@
+/* =====================================================================
+   Backyard Thru-Hike — Homepage
+   Drop these into your existing styles.css. Everything reads from the
+   seasonal CSS custom properties below, so the whole page re-themes by
+   setting  data-season="fall|winter|spring"  on <html> (default summer).
+   ===================================================================== */
+
+/* ---------- (optional) base reset — skip if your codebase has one ---------- */
+*{ box-sizing:border-box; margin:0; padding:0; }
+body{ font-family:'Inter',system-ui,sans-serif; -webkit-font-smoothing:antialiased; color:var(--ink); background:var(--bg); }
+a{ color:inherit; text-decoration:none; }
+
+/* =====================================================================
+   THEME TOKENS — seasonal palettes
+   ===================================================================== */
+:root{                 /* SUMMER (default) */
+  --bg:#EFEAD8;  --card:#F5F1E3;  --ink:#26302A;  --ink-soft:#565c4f;
+  --green:#2F4F3D;  --rust:#C1542C;  --slate:#5F8696;  --accent:#C1542C;
+  --off-white:#FBF6E9;
+  --sky-top:#F6ECCB;  --sky-bottom:#ECE7CB;  --sun:#E8B84B;
+  --ridge-far:#A9BC9C;  --ridge-mid:#728F66;  --ridge-near:#4C6B49;  --ridge-fore:#2F4F3D;
+}
+[data-season="fall"]{
+  --bg:#ECE3CC;  --card:#F3EAD2;  --ink:#2c2a22;  --ink-soft:#5e5640;
+  --green:#4A5536;  --rust:#B14620;  --slate:#6E7E7E;  --accent:#B14620;
+  --sky-top:#F4DCB4;  --sky-bottom:#EBDDBC;  --sun:#D9702C;
+  --ridge-far:#CBA873;  --ridge-mid:#B0793F;  --ridge-near:#7C5A2E;  --ridge-fore:#463822;
+}
+[data-season="winter"]{
+  --bg:#ECEAE1;  --card:#F4F2EA;  --ink:#24292b;  --ink-soft:#54595c;
+  --green:#3C4D55;  --rust:#A85A3E;  --slate:#5F8696;  --accent:#5F8696;
+  --sky-top:#DCE4EA;  --sky-bottom:#E9EAE3;  --sun:#CBD6DC;
+  --ridge-far:#B3C0C7;  --ridge-mid:#8597A1;  --ridge-near:#5E7682;  --ridge-fore:#3B4C54;
+}
+[data-season="spring"]{
+  --bg:#EFECD9;  --card:#F5F2E0;  --ink:#26302A;  --ink-soft:#54604e;
+  --green:#356A3A;  --rust:#C1542C;  --slate:#5F8696;  --accent:#356A3A;
+  --sky-top:#E3EBD2;  --sky-bottom:#ECEDDB;  --sun:#EBD66E;
+  --ridge-far:#B3CC9E;  --ridge-mid:#7FAE69;  --ridge-near:#548045;  --ridge-fore:#34582F;
+}
+
+html{ scroll-behavior:smooth; }
+[id]{ scroll-margin-top:80px; }          /* offset the sticky header on anchor jumps */
+
+@keyframes bthFade{ from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:translateY(0);} }
+
+/* Optional parchment ruled-line texture — add class "bth-paper" to the page wrapper */
+.bth-paper{ position:relative; }
+.bth-paper::before{
+  content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
+  background-image:repeating-linear-gradient(180deg, transparent 0 31px, rgba(47,79,61,0.05) 31px 32px);
+}
+.bth-paper > *{ position:relative; z-index:1; }
+
+/* =====================================================================
+   01 — HEADER + HAMBURGER NAV
+   ===================================================================== */
+.bth-header{ position:sticky; top:0; z-index:60; backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); background:color-mix(in srgb, var(--bg) 86%, transparent); border-bottom:1px solid color-mix(in srgb, var(--green) 22%, transparent); }
+.bth-header__inner{ max-width:1200px; margin:0 auto; padding:14px 28px; display:flex; align-items:center; justify-content:space-between; gap:24px; }
+.bth-brand{ display:flex; align-items:center; gap:12px; }
+.bth-brand__mark{ width:26px; height:26px; flex:0 0 auto; transform:rotate(45deg); background:var(--green); border-radius:5px; display:inline-flex; align-items:center; justify-content:center; }
+.bth-brand__mark > span{ width:9px; height:9px; transform:rotate(-45deg); border:1.5px solid var(--bg); border-radius:2px; }
+.bth-brand__text{ display:flex; flex-direction:column; line-height:1; }
+.bth-brand__name{ font-family:'Zilla Slab',serif; font-weight:700; font-size:19px; letter-spacing:-0.01em; color:var(--ink); }
+.bth-brand__kicker{ font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:0.32em; color:var(--accent); margin-top:4px; }
+.bth-nav{ display:flex; gap:24px; }
+.bth-nav a{ font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:0.08em; color:var(--ink); transition:color .15s; }
+.bth-nav a:hover{ color:var(--accent); }
+.bth-nav a.is-active{ color:var(--accent); border-bottom:1.5px solid var(--accent); padding-bottom:2px; }
+.bth-burger{ display:none; flex-direction:column; gap:5px; padding:10px; background:transparent; border:none; cursor:pointer; }
+.bth-burger span{ display:block; width:24px; height:2px; background:var(--ink); }
+.bth-mobile-menu{ display:none; border-top:1px solid color-mix(in srgb, var(--green) 18%, transparent); background:var(--bg); padding:8px 28px 22px; }
+.bth-mobile-menu.is-open{ display:block; }
+.bth-mobile-menu nav{ display:flex; flex-direction:column; }
+.bth-mobile-menu a{ font-family:'JetBrains Mono',monospace; font-size:14px; letter-spacing:0.06em; color:var(--ink); padding:13px 0; border-bottom:1px solid rgba(47,79,61,0.1); }
+@media (max-width:879px){
+  .bth-nav{ display:none; }
+  .bth-burger{ display:inline-flex; }
+}
+
+/* =====================================================================
+   02 — HERO
+   (the gradient id "bthSky" in hero.html must be unique per page)
+   ===================================================================== */
+.bth-hero{ position:relative; min-height:clamp(580px,90vh,840px); display:flex; align-items:flex-start; overflow:hidden; }
+.bth-hero__bg{ position:absolute; inset:0; width:100%; height:100%; }
+.bth-hero__inner{ position:relative; z-index:2; max-width:1200px; margin:0 auto; width:100%; padding:clamp(70px,11vh,128px) 28px 60px; }
+.bth-hero__col{ max-width:720px; }
+.bth-pill{ display:inline-flex; align-items:center; gap:8px; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.22em; color:var(--green); background:color-mix(in srgb, var(--bg) 70%, transparent); padding:6px 12px; border-radius:999px; border:1px solid color-mix(in srgb, var(--green) 22%, transparent); }
+.bth-pill__dot{ width:6px; height:6px; border-radius:50%; background:var(--accent); }
+.bth-hero h1{ font-family:'Zilla Slab',serif; font-weight:700; font-size:clamp(2.7rem,6.2vw,5rem); line-height:0.98; letter-spacing:-0.02em; color:var(--ink); margin-top:22px; text-wrap:balance; }
+.bth-hero__lede{ font-family:'Inter',sans-serif; font-size:clamp(1.05rem,1.7vw,1.3rem); line-height:1.55; color:var(--ink-soft); margin-top:22px; max-width:560px; text-wrap:pretty; }
+.bth-cta-row{ display:flex; flex-wrap:wrap; gap:14px; margin-top:34px; }
+.bth-btn{ display:inline-flex; align-items:center; gap:9px; font-family:'JetBrains Mono',monospace; font-size:13px; letter-spacing:0.05em; font-weight:500; padding:14px 22px; border-radius:8px; cursor:pointer; transition:filter .15s, background .15s; }
+.bth-btn--primary{ background:var(--accent); color:var(--off-white); border:none; box-shadow:0 6px 16px -8px rgba(0,0,0,0.4); }
+.bth-btn--primary:hover{ filter:brightness(1.07); }
+.bth-btn--outline{ color:var(--green); border:1.5px solid var(--green); background:color-mix(in srgb, var(--bg) 55%, transparent); }
+.bth-btn--outline:hover{ background:color-mix(in srgb, var(--green) 10%, var(--bg)); }
+
+/* =====================================================================
+   03 — ELEVATION DIVIDER
+   ===================================================================== */
+.bth-divider{ background:var(--ridge-fore); line-height:0; }
+.bth-divider svg{ display:block; width:100%; height:62px; }
+
+/* =====================================================================
+   04 — JOURNAL CARDS
+   ===================================================================== */
+.bth-section{ max-width:1200px; margin:0 auto; padding:clamp(56px,8vw,96px) 28px; }
+.bth-section__head{ display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:16px; margin-bottom:40px; }
+.bth-eyebrow{ font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.26em; color:var(--accent); margin-bottom:12px; }
+.bth-h2{ font-family:'Zilla Slab',serif; font-weight:700; font-size:clamp(1.9rem,3.6vw,2.9rem); line-height:1.03; letter-spacing:-0.015em; color:var(--ink); }
+.bth-seelink{ font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:0.06em; color:var(--green); border-bottom:1.5px solid var(--accent); padding-bottom:3px; transition:color .15s; }
+.bth-seelink:hover{ color:var(--accent); }
+.bth-card-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(290px,1fr)); gap:26px; }
+.bth-card{ display:flex; flex-direction:column; background:var(--card); border:1px solid rgba(47,79,61,0.12); border-left:4px solid var(--green); border-radius:4px; overflow:hidden; box-shadow:0 10px 26px -22px rgba(38,48,42,0.7); }
+/* empty-state fallback = diagonal stripe; a real <img> covers it once present */
+.bth-card__thumb{ height:188px; width:100%; object-fit:cover; display:block; background:repeating-linear-gradient(135deg, rgba(47,79,61,0.06) 0 10px, rgba(47,79,61,0.11) 10px 20px); }
+.bth-card__body{ padding:20px 20px 22px; display:flex; flex-direction:column; flex:1; }
+.bth-tags{ display:flex; flex-wrap:wrap; gap:7px; margin-bottom:13px; }
+.bth-tag{ font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.1em; color:var(--slate); border:1px solid color-mix(in srgb, var(--slate) 40%, transparent); padding:3px 8px; border-radius:4px; }
+.bth-card h3{ font-family:'Zilla Slab',serif; font-weight:600; font-size:1.32rem; line-height:1.12; letter-spacing:-0.01em; color:var(--ink); }
+.bth-card__excerpt{ font-family:'Inter',sans-serif; font-size:0.95rem; line-height:1.55; color:var(--ink-soft); margin-top:10px; flex:1; text-wrap:pretty; }
+.bth-card__meta{ display:flex; align-items:center; gap:10px; margin-top:18px; padding-top:14px; border-top:1px solid rgba(47,79,61,0.1); font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:0.08em; color:var(--ink-soft); }
+.bth-card__meta .dot{ opacity:0.4; }
+
+/* =====================================================================
+   05 — CORNER LIBRARY
+   ===================================================================== */
+.bth-library{ background:color-mix(in srgb, var(--green) 9%, var(--bg)); border-top:1px solid rgba(47,79,61,0.12); border-bottom:1px solid rgba(47,79,61,0.12); }
+.bth-library__inner{ max-width:1200px; margin:0 auto; padding:clamp(56px,8vw,96px) 28px; display:grid; grid-template-columns:repeat(auto-fit, minmax(320px,1fr)); gap:48px; align-items:center; }
+.bth-library__media{ position:relative; }
+.bth-library__photo{ width:100%; height:clamp(280px,34vw,400px); object-fit:cover; display:block; border-radius:10px; border:1px solid rgba(47,79,61,0.18); background:repeating-linear-gradient(135deg, rgba(47,79,61,0.06) 0 10px, rgba(47,79,61,0.11) 10px 20px); }
+.bth-badge{ position:absolute; inset:-10px -10px auto auto; width:84px; height:84px; transform:rotate(8deg); background:var(--accent); color:var(--off-white); border-radius:50%; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:0.1em; line-height:1.4; box-shadow:0 8px 18px -8px rgba(0,0,0,0.45); z-index:2; }
+.bth-library__lede{ font-family:'Inter',sans-serif; font-size:1.05rem; line-height:1.6; color:var(--ink-soft); margin-top:18px; max-width:480px; text-wrap:pretty; }
+.bth-itemlist{ margin-top:26px; display:flex; flex-direction:column; border:1px solid rgba(47,79,61,0.14); border-radius:8px; overflow:hidden; background:var(--card); }
+.bth-item{ display:flex; align-items:center; justify-content:space-between; gap:16px; padding:14px 18px; border-bottom:1px solid rgba(47,79,61,0.09); }
+.bth-item:last-child{ border-bottom:none; }
+.bth-item__name{ font-family:'Inter',sans-serif; font-weight:500; font-size:0.98rem; color:var(--ink); }
+.bth-status{ font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.08em; padding:4px 9px; border-radius:999px; white-space:nowrap; }
+.bth-status--in{ background:color-mix(in srgb, var(--green) 16%, transparent); color:var(--green); }
+.bth-status--out{ background:color-mix(in srgb, var(--rust) 16%, transparent); color:var(--rust); }
+.bth-status--seasonal{ background:color-mix(in srgb, var(--slate) 18%, transparent); color:var(--slate); }
+.bth-library__actions{ display:flex; flex-wrap:wrap; align-items:center; gap:16px; margin-top:24px; }
+.bth-btn--green{ background:var(--green); color:var(--off-white); border:none; }
+.bth-btn--green:hover{ filter:brightness(1.1); }
+.bth-note{ font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.04em; color:var(--ink-soft); }
+
+/* =====================================================================
+   06 — FOOTER + TRAIL-TIP TICKER
+   ===================================================================== */
+.bth-footer{ background:var(--ridge-fore); color:#E7E2CF; }
+.bth-ticker{ display:flex; align-items:center; gap:14px; padding:13px 28px; border-bottom:1px solid rgba(255,255,255,0.12); overflow:hidden; }
+.bth-ticker__chip{ flex:0 0 auto; font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.14em; color:var(--bg); background:var(--accent); padding:5px 9px; border-radius:4px; }
+.bth-ticker__text{ font-family:'JetBrains Mono',monospace; font-size:12.5px; letter-spacing:0.02em; color:#EDE8D6; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.bth-ticker__text.is-changing{ animation:bthFade 0.5s ease both; }
+.bth-footer__grid{ max-width:1200px; margin:0 auto; padding:clamp(48px,6vw,72px) 28px 30px; display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:40px; }
+.bth-footer__brandcol{ grid-column:1 / -1; max-width:520px; }
+.bth-wordmark{ font-family:'Zilla Slab',serif; font-weight:700; font-size:clamp(2.4rem,5vw,3.4rem); line-height:0.95; letter-spacing:-0.02em; color:var(--bg); }
+.bth-footer__brandcol p{ font-family:'Inter',sans-serif; font-size:0.98rem; line-height:1.6; color:rgba(231,226,207,0.78); margin-top:16px; }
+.bth-footer__col{ display:flex; flex-direction:column; gap:11px; }
+.bth-footer__coltitle{ font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.2em; color:rgba(231,226,207,0.5); margin-bottom:4px; }
+.bth-footer__col a{ font-family:'Inter',sans-serif; font-size:0.95rem; color:#E7E2CF; transition:color .15s; }
+.bth-footer__col a:hover{ color:#fff; }
+.bth-footer__addr{ font-family:'Inter',sans-serif; font-size:0.95rem; color:rgba(231,226,207,0.82); }
+.bth-footer__coords{ font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.06em; color:rgba(231,226,207,0.6); margin-top:4px; }
+.bth-footer__bottom{ max-width:1200px; margin:0 auto; padding:18px 28px 28px; border-top:1px solid rgba(255,255,255,0.12); display:flex; flex-wrap:wrap; justify-content:space-between; gap:10px; font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:0.08em; color:rgba(231,226,207,0.55); }
