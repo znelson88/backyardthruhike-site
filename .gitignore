@@ -1,2 +1,12 @@
 node_modules/
 _site/
+
+# Local-only photo working folder — RAW + full-res originals.
+# These are huge (~1.3 GB) and must never be committed. Optimized,
+# web-sized copies belong in src/images/ instead.
+site pics/
+*.CR2
+
+# OS cruft
+.DS_Store
+Thumbs.db

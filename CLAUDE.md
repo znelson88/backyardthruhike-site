@@ -1,7 +1,7 @@
 # Backyard Thru Hike — Project Notes
 
 ## What this is
-A trail journal and community nature resource for Plattsburgh, NY. The premise: you don't need to travel to find nature — the backyard, vacant lot, drainage ditch, and unmowed strip are worth paying attention to.
+A trail journal and community nature resource for Plattsburg, MO (39.5656°N, 94.4477°W). The premise: you don't need to travel to find nature — the backyard, vacant lot, drainage ditch, and unmowed strip are worth paying attention to.
 
 **Live site domain:** backyardthruhike.com
 
@@ -54,15 +54,21 @@ src/
 - `/about/` — About
 - `/library/` — Corner Library (gear/book lending + request form)
 
-## Active development branch
-`claude/website-claude-design-c9uchz`
+## Build & local dev
+- `npm install` — install dependencies
+- `npm run build` — build to `_site/`
+- `npm start` — Eleventy dev server with live reload
+- Deploy: Cloudflare Pages builds `_site/` (see `wrangler.toml`)
 
-## In-progress work
-Redesign pass informed by Claude Design output. Design targets:
-1. Stronger homepage hero (photo/illustration, better hierarchy)
-2. Polished blog/journal cards (photo thumbnails, metadata)
-3. More inviting Corner Library page (gear lending + request form)
-4. Mobile hamburger nav (currently header just stacks)
-5. Seasonal color shift (subtle warm→cool tones across seasons)
+## Status (as of 2026-06-29)
+The Claude Design homepage redesign is **merged to `main`** (PR #23). The site builds clean. Shipped in that pass: data-driven header/footer, mobile hamburger nav, seasonal color shift (`data-season` on `<html>`), homepage hero, and the seasonal footer ticker.
 
-When bringing in Claude Design changes, expect: updated CSS variables, HTML component snippets, SVG assets, and revised color tokens. Map these into `styles.css` and the relevant `.njk` templates.
+## Known gaps / next up
+- **No blog posts yet** — `src/blog/` contains only `blog.json`; the journal listing renders empty until the first `.md` post is added (via Decap CMS or by hand).
+- Library access-request form is wired to a Cloudflare Worker; confirm end-to-end before relying on it.
+- Photo originals live in the local-only `site pics/` folder (gitignored). Web-sized copies go in `src/images/`.
+
+## Conventions
+- Edit copy in `src/_data/*.json` (or via the CMS at `/admin/`), not in templates.
+- All styles live in `src/styles.css`. Colors are CSS variables.
+- Blog posts are Markdown in `src/blog/`; `blog/blog.json` applies the `post.njk` layout to them automatically.
