@@ -1,43 +1,83 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-season="{{ season }}">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{% if title and title != "Home" %}{{ title }} — {% endif %}Backyard Thru Hike</title>
 <meta name="description" content="{{ description or 'Backyard Thru Hike — finding the national park in the space you already have.' }}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="/styles.css">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 </head>
 <body>
 
-<header class="site-header">
-  <div class="wrap">
-    <a class="brand" href="/">
-      <img src="/logo.svg" alt="" aria-hidden="true" class="brand-logo" width="36" height="36">
-      <span>
-        <span class="brand-name">{{ siteconfig.brand_name }}</span>
-        <span class="brand-sub">{{ siteconfig.brand_tagline }}</span>
+<header class="bth-header" id="top">
+  <div class="bth-header__inner">
+    <a class="bth-brand" href="/">
+      <span class="bth-brand__mark"><span></span></span>
+      <span class="bth-brand__text">
+        <span class="bth-brand__name">{{ siteconfig.brand_name }}</span>
+        <span class="bth-brand__kicker">{{ siteconfig.brand_tagline }}</span>
       </span>
     </a>
-    <nav class="main-nav" aria-label="Primary">
-      <ul>
-        {% for item in siteconfig.nav %}
-        <li><a href="{{ item.url }}" {% if page.url == item.url or (item.url != "/" and item.url in page.url) %}aria-current="page"{% endif %}>{{ item.label }}</a></li>
-        {% endfor %}
-      </ul>
+
+    <nav class="bth-nav" aria-label="Primary">
+      {% for item in siteconfig.nav %}
+      <a href="{{ item.url }}"
+         {% if page.url == item.url or (item.url != "/" and item.url in page.url) %}aria-current="page" class="is-active"{% endif %}>{{ item.label }}</a>
+      {% endfor %}
+    </nav>
+
+    <button class="bth-burger" type="button" aria-label="Menu"
+            aria-expanded="false" aria-controls="bth-mobile-menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <div class="bth-mobile-menu" id="bth-mobile-menu">
+    <nav aria-label="Mobile primary">
+      {% for item in siteconfig.nav %}
+      <a href="{{ item.url }}"
+         {% if page.url == item.url or (item.url != "/" and item.url in page.url) %}aria-current="page"{% endif %}>{{ item.label }}</a>
+      {% endfor %}
     </nav>
   </div>
 </header>
 
 {{ content | safe }}
 
-<footer class="site-footer">
-  <a id="seasonal-ticker" class="seasonal-ticker" href="https://grownative.org/learn/native-landscape-care-calendar/" target="_blank" rel="noopener noreferrer">
-    <span class="ticker-season"></span>
-    <span class="ticker-slide"></span>
-  </a>
+<footer class="bth-footer">
+  <div class="bth-ticker">
+    <span class="bth-ticker__chip">TRAIL TIP</span>
+    <span class="bth-ticker__text" data-bth-tip></span>
+  </div>
+
+  <div class="bth-footer__grid">
+    <div class="bth-footer__brandcol">
+      <div class="bth-wordmark">Get Outside.</div>
+      <p>A backyard thru-hike is just a long walk that starts at your own back door. Start one this week.</p>
+    </div>
+    <div class="bth-footer__col">
+      <div class="bth-footer__coltitle">EXPLORE</div>
+      {% for item in siteconfig.nav %}
+      <a href="{{ item.url }}">{{ item.label }}</a>
+      {% endfor %}
+    </div>
+    <div class="bth-footer__col">
+      <div class="bth-footer__coltitle">FIND US</div>
+      <span class="bth-footer__addr">Plattsburgh, NY</span>
+      <span class="bth-footer__coords">44.6995&deg;N, 73.4529&deg;W</span>
+    </div>
+  </div>
+
+  <div class="bth-footer__bottom">
+    <span>&copy; 2026 BACKYARD THRU-HIKE</span>
+    <span>BACKYARDTHRUHIKE.COM</span>
+  </div>
 </footer>
 
-<script src="/seasonal-ticker.js"></script>
+<script src="/scripts/nav.js" defer></script>
+<script src="/scripts/ticker.js" defer></script>
 </body>
 </html>

@@ -1,10 +1,17 @@
 {
   "eyebrow": "Library",
-  "headline": "Neighborhood Libary",
-  "lede": "A little library for the neighborhood.",
+  "headline": "Borrow what you need.<br>Return it when you&rsquo;re done.",
+  "lede": "A shelf of shared gear and well-worn field guides, kept in the neighborhood. Take a pack for the weekend, a guidebook for the season — leave it better than you found it.",
   "access_status": "Now Accepting Requests",
   "form_title": "Request an invite",
-  "form_description": "Tell me what books you are looking for and what cross streets you live on. once approved, I'll set up access and send it your way.",
+  "form_description": "Tell me what books you are looking for and what cross streets you live on. Once approved, I'll set up access and send it your way.",
   "form_success": "Request sent — I'll be in touch.",
-  "form_error": "Something went wrong. Please try again."
+  "form_error": "Something went wrong. Please try again.",
+  "items": [
+    { "name": "Osprey Daypack — 28L", "status": "in", "status_label": "AVAILABLE" },
+    { "name": "Field Guide: Adirondack Wildflowers", "status": "in", "status_label": "AVAILABLE" },
+    { "name": "Trekking Poles (pair)", "status": "out", "status_label": "OUT · BACK FRI" },
+    { "name": "Two-Person Tent", "status": "in", "status_label": "AVAILABLE" },
+    { "name": "Snowshoes — Women's M", "status": "seasonal", "status_label": "SEASONAL" }
+  ]
 }

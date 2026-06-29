@@ -4,6 +4,7 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/logo.svg");
   eleventyConfig.addPassthroughCopy("src/images");
   eleventyConfig.addPassthroughCopy("src/admin");
+  eleventyConfig.addPassthroughCopy("src/scripts");
 
   eleventyConfig.addCollection("blog", function(api) {
     return api.getFilteredByGlob("src/blog/*.md").reverse();
