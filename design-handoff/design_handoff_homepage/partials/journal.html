@@ -1,0 +1,35 @@
+<!-- 04 · Journal cards. Loop one <article class="bth-card"> per CMS post.
+     Nunjucks example:
+       {% for post in journal %}  ...card...  {% endfor %}
+     The diagonal-stripe .bth-card__thumb background is the empty-state
+     fallback; the <img> covers it once a real photo exists. -->
+<section class="bth-section" id="journal">
+  <div class="bth-section__head">
+    <div>
+      <div class="bth-eyebrow">FIELD JOURNAL</div>
+      <h2 class="bth-h2">Lately, on the trail</h2>
+    </div>
+    <a class="bth-seelink" href="/journal">All entries &rarr;</a>
+  </div>
+
+  <div class="bth-card-grid">
+
+    <article class="bth-card">
+      <img class="bth-card__thumb" src="/img/lake-dawn.jpg" alt="" loading="lazy">
+      <div class="bth-card__body">
+        <div class="bth-tags">
+          <span class="bth-tag">LAKESIDE</span>
+          <span class="bth-tag">EASY</span>
+        </div>
+        <h3>Smithville Lake at First Light</h3>
+        <p class="bth-card__excerpt">Out the door by 5:40, fog still sitting on the water. Two herons and a beaver wake &mdash; all before the first boat trailer hit the ramp.</p>
+        <div class="bth-card__meta">
+          <span>JUN 18, 2026</span><span class="dot">&bull;</span><span>4 MIN READ</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- repeat <article class="bth-card"> … per post -->
+
+  </div>
+</section>

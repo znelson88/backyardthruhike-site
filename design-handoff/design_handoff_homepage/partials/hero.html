@@ -1,0 +1,36 @@
+<!-- 02 · Hero.  Copy the SVG path d-values verbatim.
+     The gradient id "bthSky" must be unique if two heroes ever share a page. -->
+<section class="bth-hero">
+  <svg class="bth-hero__bg" viewBox="0 0 1440 760" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    <defs>
+      <linearGradient id="bthSky" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="var(--sky-top)"></stop>
+        <stop offset="1" stop-color="var(--sky-bottom)"></stop>
+      </linearGradient>
+    </defs>
+    <rect x="0" y="0" width="1440" height="760" fill="url(#bthSky)"></rect>
+    <circle cx="1175" cy="158" r="92" fill="var(--sun)" opacity="0.16"></circle>
+    <circle cx="1175" cy="158" r="56" fill="var(--sun)" opacity="0.9"></circle>
+    <g stroke="var(--ridge-near)" fill="none" opacity="0.13" stroke-width="1.4">
+      <path d="M-40,250 C 240,200 520,210 760,234 C 1020,260 1260,238 1500,250"></path>
+      <path d="M-40,300 C 260,256 540,266 780,288 C 1040,312 1280,292 1500,302"></path>
+      <path d="M-40,196 C 220,150 480,160 720,182 C 980,206 1240,186 1500,196"></path>
+    </g>
+    <path d="M0,330 C 220,288 380,320 600,300 C 820,280 980,322 1200,302 C 1320,291 1400,312 1440,304 L1440,760 L0,760 Z" fill="var(--ridge-far)"></path>
+    <path d="M0,420 C 240,378 420,420 640,398 C 880,374 1040,422 1260,400 C 1360,389 1410,410 1440,404 L1440,760 L0,760 Z" fill="var(--ridge-mid)"></path>
+    <path d="M0,512 C 220,478 440,520 680,496 C 920,472 1080,520 1300,498 C 1370,491 1410,506 1440,502 L1440,760 L0,760 Z" fill="var(--ridge-near)"></path>
+    <path d="M0,604 C 260,576 480,612 720,590 C 960,568 1160,612 1380,592 L1440,600 L1440,760 L0,760 Z" fill="var(--ridge-fore)"></path>
+  </svg>
+
+  <div class="bth-hero__inner">
+    <div class="bth-hero__col">
+      <span class="bth-pill"><span class="bth-pill__dot"></span>PLATTSBURG, MO &middot; 39.5656&deg;N</span>
+      <h1>Find the trail in your own backyard.</h1>
+      <p class="bth-hero__lede">A field journal and lending library for the people of Plattsburg &mdash; for anyone who wants to find a little wildness in the ordinary ground underfoot. No summit required.</p>
+      <div class="bth-cta-row">
+        <a class="bth-btn bth-btn--primary" href="/journal">Read the Journal &rarr;</a>
+        <a class="bth-btn bth-btn--outline" href="/library">Visit the Corner Library</a>
+      </div>
+    </div>
+  </div>
+</section>

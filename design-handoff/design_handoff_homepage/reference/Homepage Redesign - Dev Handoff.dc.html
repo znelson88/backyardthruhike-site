@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    *{ box-sizing:border-box; margin:0; padding:0; }
+    body{ font-family:'Inter',system-ui,sans-serif; -webkit-font-smoothing:antialiased; }
+    ::selection{ background:#C1542C; color:#FBF6E9; }
+  </style>
+</helmet>
+
+<div style="background:#EFEAD8; color:#26302A; min-height:100vh; width:100%; background-image:repeating-linear-gradient(180deg, transparent 0 31px, rgba(47,79,61,0.045) 31px 32px);">
+
+  <!-- ============ DOC HEADER ============ -->
+  <header style="max-width:1080px; margin:0 auto; padding:clamp(48px,7vw,84px) 28px clamp(20px,3vw,30px);">
+    <div style="display:flex; align-items:center; gap:12px; margin-bottom:26px;">
+      <span style="width:26px; height:26px; flex:0 0 auto; transform:rotate(45deg); background:#2F4F3D; border-radius:5px; display:inline-flex; align-items:center; justify-content:center;">
+        <span style="width:9px; height:9px; transform:rotate(-45deg); border:1.5px solid #EFEAD8; border-radius:2px;"></span>
+      </span>
+      <span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.3em; color:#C1542C;">BACKYARD THRU-HIKE</span>
+    </div>
+    <div style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.26em; color:#5F8696; margin-bottom:16px;">DESIGN &rarr; DEV HANDOFF &middot; HOMEPAGE</div>
+    <h1 style="font-family:'Zilla Slab',serif; font-weight:700; font-size:clamp(2.3rem,5vw,3.8rem); line-height:1.0; letter-spacing:-0.02em; max-width:16ch; text-wrap:balance;">Drop-in snippets for the homepage build.</h1>
+    <p style="font-family:'Inter',sans-serif; font-size:clamp(1rem,1.5vw,1.18rem); line-height:1.6; color:#565c4f; margin-top:20px; max-width:60ch; text-wrap:pretty;">Every changed section as a self-contained <strong>HTML + CSS</strong> block, plus the seasonal design tokens and the hamburger pattern. Each is vanilla and class-based &mdash; CSS goes in <code style="font-family:'JetBrains Mono',monospace; font-size:0.85em; background:rgba(47,79,61,0.1); padding:1px 6px; border-radius:4px;">styles.css</code>, markup drops straight into your <code style="font-family:'JetBrains Mono',monospace; font-size:0.85em; background:rgba(47,79,61,0.1); padding:1px 6px; border-radius:4px;">.njk</code> partials. Previews are live; hit <strong>Copy</strong> on any block.</p>
+
+    <div style="display:flex; flex-wrap:wrap; gap:10px 18px; margin-top:30px; padding-top:24px; border-top:1px solid rgba(47,79,61,0.16);">
+      <a href="#tokens" style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.08em; color:#2F4F3D; border-bottom:1.5px solid #C1542C; padding-bottom:2px;">00 · Tokens &amp; palettes</a>
+      <sc-for list="{{ toc }}" as="t" hint-placeholder-count="6">
+        <a href="#{{ t.id }}" style="font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.08em; color:#5a5f54; border-bottom:1.5px solid transparent; padding-bottom:2px;" style-hover="color:#C1542C; border-bottom-color:#C1542C;">{{ t.num }} · {{ t.title }}</a>
+      </sc-for>
+    </div>
+  </header>
+
+  <!-- ============ TOKENS & PALETTES ============ -->
+  <section id="tokens" style="max-width:1080px; margin:0 auto; padding:clamp(34px,5vw,56px) 28px; scroll-margin-top:24px;">
+    <div style="display:flex; align-items:baseline; gap:14px; margin-bottom:8px;">
+      <span style="font-family:'JetBrains Mono',monospace; font-size:13px; color:#C1542C; font-weight:700;">00</span>
+      <h2 style="font-family:'Zilla Slab',serif; font-weight:700; font-size:clamp(1.6rem,3vw,2.3rem); letter-spacing:-0.015em;">Design tokens &amp; seasonal palettes</h2>
+    </div>
+    <p style="font-family:'Inter',sans-serif; font-size:1rem; line-height:1.6; color:#565c4f; max-width:66ch; margin-bottom:30px; text-wrap:pretty;">Every UI color reads from a CSS custom property, so the whole page re-themes by season. Default is <strong>summer</strong>. Switch by setting <code style="font-family:'JetBrains Mono',monospace; font-size:0.85em; background:rgba(47,79,61,0.1); padding:1px 6px; border-radius:4px;">data-season="fall"</code> on <code style="font-family:'JetBrains Mono',monospace; font-size:0.85em; background:rgba(47,79,61,0.1); padding:1px 6px; border-radius:4px;">&lt;html&gt;</code> &mdash; derive it server-side from the month (Dec–Feb winter, Mar–May spring, Jun–Aug summer, Sep–Nov fall).</p>
+
+    <div style="display:flex; flex-direction:column; gap:22px; margin-bottom:34px;">
+      <sc-for list="{{ paletteRows }}" as="p" hint-placeholder-count="4">
+        <div style="background:#F5F1E3; border:1px solid rgba(47,79,61,0.14); border-left:4px solid #2F4F3D; border-radius:6px; padding:16px 18px;">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:14px;">
+            <span style="font-family:'Zilla Slab',serif; font-weight:700; font-size:1.05rem;">{{ p.name }}</span>
+            <span style="font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:0.12em; color:#5F8696;">{{ p.sel }}</span>
+          </div>
+          <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(118px,1fr)); gap:9px;">
+            <sc-for list="{{ p.vars }}" as="v" hint-placeholder-count="8">
+              <div style="display:flex; align-items:center; gap:8px; min-width:0;">
+                <span style="width:22px; height:22px; flex:0 0 auto; border-radius:5px; border:1px solid rgba(0,0,0,0.12); background:{{ v.hex }};"></span>
+                <span style="display:flex; flex-direction:column; min-width:0; line-height:1.25;">
+                  <span style="font-family:'JetBrains Mono',monospace; font-size:8.5px; letter-spacing:0.04em; color:#6b7066; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">{{ v.label }}</span>
+                  <span style="font-family:'JetBrains Mono',monospace; font-size:9.5px; color:#26302A;">{{ v.hex }}</span>
+                </span>
+              </div>
+            </sc-for>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+
+    <div style="background:#222D26; border-radius:10px; overflow:hidden; box-shadow:0 16px 40px -28px rgba(0,0,0,0.6);">
+      <div style="display:flex; align-items:center; justify-content:space-between; padding:11px 16px; border-bottom:1px solid rgba(255,255,255,0.1);">
+        <span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.14em; color:#9fb39a;">CSS &middot; styles.css</span>
+        <button onClick="{{ copyTokens }}" data-label="Copy" style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.1em; color:#EDE8D6; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.16); border-radius:6px; padding:5px 12px; cursor:pointer;">Copy</button>
+      </div>
+      <pre style="margin:0; padding:18px 18px 22px; overflow:auto; max-height:420px; font-family:'JetBrains Mono',monospace; font-size:11.5px; line-height:1.65; color:#E7E2CF; white-space:pre;">{{ tokenCss }}</pre>
+    </div>
+  </section>
+
+  <!-- ============ DELIVERABLES ============ -->
+  <sc-for list="{{ deliverables }}" as="d" hint-placeholder-count="6">
+    <section id="{{ d.id }}" style="max-width:1080px; margin:0 auto; padding:clamp(34px,5vw,56px) 28px; scroll-margin-top:24px;">
+      <div style="display:flex; align-items:baseline; gap:14px; margin-bottom:8px;">
+        <span style="font-family:'JetBrains Mono',monospace; font-size:13px; color:#C1542C; font-weight:700;">{{ d.num }}</span>
+        <h2 style="font-family:'Zilla Slab',serif; font-weight:700; font-size:clamp(1.6rem,3vw,2.3rem); letter-spacing:-0.015em;">{{ d.title }}</h2>
+      </div>
+      <p style="font-family:'Inter',sans-serif; font-size:1rem; line-height:1.6; color:#565c4f; max-width:66ch; margin-bottom:24px; text-wrap:pretty;">{{ d.blurb }}</p>
+
+      <div style="display:flex; flex-direction:column; gap:14px; margin-bottom:24px;">
+        <sc-for list="{{ d.previews }}" as="pv" hint-placeholder-count="1">
+          <div style="border:1px solid rgba(47,79,61,0.18); border-radius:10px; overflow:hidden; background:#EFEAD8;">
+            <div style="font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:0.16em; color:#5F8696; padding:8px 14px; border-bottom:1px solid rgba(47,79,61,0.12); background:#F5F1E3;">{{ pv.label }}</div>
+            <iframe srcdoc="{{ pv.srcdoc }}" width="{{ pv.width }}" height="{{ pv.height }}" sandbox="allow-scripts" loading="lazy" title="{{ pv.label }}" style="border:0; display:block; max-width:100%; background:#EFEAD8;"></iframe>
+          </div>
+        </sc-for>
+      </div>
+
+      <div style="display:flex; flex-direction:column; gap:14px;">
+        <sc-for list="{{ d.code }}" as="c" hint-placeholder-count="2">
+          <div style="background:#222D26; border-radius:10px; overflow:hidden; box-shadow:0 16px 40px -28px rgba(0,0,0,0.6);">
+            <div style="display:flex; align-items:center; justify-content:space-between; padding:11px 16px; border-bottom:1px solid rgba(255,255,255,0.1);">
+              <span style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.14em; color:#9fb39a;">{{ c.lang }}</span>
+              <button onClick="{{ c.copy }}" data-label="Copy" style="font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.1em; color:#EDE8D6; background:rgba(255,255,255,0.08); border:1px solid rgba(255,255,255,0.16); border-radius:6px; padding:5px 12px; cursor:pointer;">Copy</button>
+            </div>
+            <pre style="margin:0; padding:18px 18px 22px; overflow:auto; max-height:460px; font-family:'JetBrains Mono',monospace; font-size:11.5px; line-height:1.65; color:#E7E2CF; white-space:pre;">{{ c.text }}</pre>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+  </sc-for>
+
+  <!-- ============ DOC FOOTER ============ -->
+  <footer style="max-width:1080px; margin:0 auto; padding:clamp(40px,6vw,72px) 28px clamp(56px,8vw,90px);">
+    <div style="border-top:1px solid rgba(47,79,61,0.16); padding-top:26px; display:flex; flex-wrap:wrap; justify-content:space-between; gap:14px; align-items:center;">
+      <span style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:0.1em; color:#6b7066;">SKIP: PAGE LAYOUTS &middot; TYPE SCALE &middot; CMS DATA &mdash; HANDLED IN-CODEBASE</span>
+      <span style="font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:0.1em; color:#6b7066;">BACKYARDTHRUHIKE.COM</span>
+    </div>
+  </footer>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  font = '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">';
+
+  baseCss = `*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Inter',system-ui,sans-serif;-webkit-font-smoothing:antialiased;color:var(--ink);background:var(--bg);}
+a{color:inherit;text-decoration:none;}`;
+
+  tokenCss = `/* ===== Backyard Thru-Hike — seasonal theme tokens ===== */
+:root{                 /* SUMMER (default) */
+  --bg:#EFEAD8;  --card:#F5F1E3;  --ink:#26302A;  --ink-soft:#565c4f;
+  --green:#2F4F3D;  --rust:#C1542C;  --slate:#5F8696;  --accent:#C1542C;
+  --off-white:#FBF6E9;
+  --sky-top:#F6ECCB;  --sky-bottom:#ECE7CB;  --sun:#E8B84B;
+  --ridge-far:#A9BC9C;  --ridge-mid:#728F66;  --ridge-near:#4C6B49;  --ridge-fore:#2F4F3D;
+}
+[data-season="fall"]{
+  --bg:#ECE3CC;  --card:#F3EAD2;  --ink:#2c2a22;  --ink-soft:#5e5640;
+  --green:#4A5536;  --rust:#B14620;  --slate:#6E7E7E;  --accent:#B14620;
+  --sky-top:#F4DCB4;  --sky-bottom:#EBDDBC;  --sun:#D9702C;
+  --ridge-far:#CBA873;  --ridge-mid:#B0793F;  --ridge-near:#7C5A2E;  --ridge-fore:#463822;
+}
+[data-season="winter"]{
+  --bg:#ECEAE1;  --card:#F4F2EA;  --ink:#24292b;  --ink-soft:#54595c;
+  --green:#3C4D55;  --rust:#A85A3E;  --slate:#5F8696;  --accent:#5F8696;
+  --sky-top:#DCE4EA;  --sky-bottom:#E9EAE3;  --sun:#CBD6DC;
+  --ridge-far:#B3C0C7;  --ridge-mid:#8597A1;  --ridge-near:#5E7682;  --ridge-fore:#3B4C54;
+}
+[data-season="spring"]{
+  --bg:#EFECD9;  --card:#F5F2E0;  --ink:#26302A;  --ink-soft:#54604e;
+  --green:#356A3A;  --rust:#C1542C;  --slate:#5F8696;  --accent:#356A3A;
+  --sky-top:#E3EBD2;  --sky-bottom:#ECEDDB;  --sun:#EBD66E;
+  --ridge-far:#B3CC9E;  --ridge-mid:#7FAE69;  --ridge-near:#548045;  --ridge-fore:#34582F;
+}
+
+html{ scroll-behavior:smooth; }
+[id]{ scroll-margin-top:80px; }          /* offset the sticky header on anchor jumps */
+
+@keyframes bthFade{ from{opacity:0; transform:translateY(4px);} to{opacity:1; transform:translateY(0);} }
+
+/* Optional parchment ruled-line texture — add class "bth-paper" to the page wrapper */
+.bth-paper{ position:relative; }
+.bth-paper::before{
+  content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
+  background-image:repeating-linear-gradient(180deg, transparent 0 31px, rgba(47,79,61,0.05) 31px 32px);
+}
+.bth-paper > *{ position:relative; z-index:1; }`;
+
+  palettes = {
+    summer: { '--bg':'#EFEAD8','--card':'#F5F1E3','--ink':'#26302A','--ink-soft':'#565c4f','--green':'#2F4F3D','--rust':'#C1542C','--slate':'#5F8696','--accent':'#C1542C','--sky-top':'#F6ECCB','--sky-bottom':'#ECE7CB','--sun':'#E8B84B','--ridge-far':'#A9BC9C','--ridge-mid':'#728F66','--ridge-near':'#4C6B49','--ridge-fore':'#2F4F3D' },
+    fall:   { '--bg':'#ECE3CC','--card':'#F3EAD2','--ink':'#2c2a22','--ink-soft':'#5e5640','--green':'#4A5536','--rust':'#B14620','--slate':'#6E7E7E','--accent':'#B14620','--sky-top':'#F4DCB4','--sky-bottom':'#EBDDBC','--sun':'#D9702C','--ridge-far':'#CBA873','--ridge-mid':'#B0793F','--ridge-near':'#7C5A2E','--ridge-fore':'#463822' },
+    winter: { '--bg':'#ECEAE1','--card':'#F4F2EA','--ink':'#24292b','--ink-soft':'#54595c','--green':'#3C4D55','--rust':'#A85A3E','--slate':'#5F8696','--accent':'#5F8696','--sky-top':'#DCE4EA','--sky-bottom':'#E9EAE3','--sun':'#CBD6DC','--ridge-far':'#B3C0C7','--ridge-mid':'#8597A1','--ridge-near':'#5E7682','--ridge-fore':'#3B4C54' },
+    spring: { '--bg':'#EFECD9','--card':'#F5F2E0','--ink':'#26302A','--ink-soft':'#54604e','--green':'#356A3A','--rust':'#C1542C','--slate':'#5F8696','--accent':'#356A3A','--sky-top':'#E3EBD2','--sky-bottom':'#ECEDDB','--sun':'#EBD66E','--ridge-far':'#B3CC9E','--ridge-mid':'#7FAE69','--ridge-near':'#548045','--ridge-fore':'#34582F' }
+  };
+
+  /* ===================== HEADER + HAMBURGER ===================== */
+  headerCss = `.bth-header{ position:sticky; top:0; z-index:60; backdrop-filter:blur(8px); -webkit-backdrop-filter:blur(8px); background:color-mix(in srgb, var(--bg) 86%, transparent); border-bottom:1px solid color-mix(in srgb, var(--green) 22%, transparent); }
+.bth-header__inner{ max-width:1200px; margin:0 auto; padding:14px 28px; display:flex; align-items:center; justify-content:space-between; gap:24px; }
+.bth-brand{ display:flex; align-items:center; gap:12px; }
+.bth-brand__mark{ width:26px; height:26px; flex:0 0 auto; transform:rotate(45deg); background:var(--green); border-radius:5px; display:inline-flex; align-items:center; justify-content:center; }
+.bth-brand__mark > span{ width:9px; height:9px; transform:rotate(-45deg); border:1.5px solid var(--bg); border-radius:2px; }
+.bth-brand__text{ display:flex; flex-direction:column; line-height:1; }
+.bth-brand__name{ font-family:'Zilla Slab',serif; font-weight:700; font-size:19px; letter-spacing:-0.01em; color:var(--ink); }
+.bth-brand__kicker{ font-family:'JetBrains Mono',monospace; font-size:9.5px; letter-spacing:0.32em; color:var(--accent); margin-top:4px; }
+.bth-nav{ display:flex; gap:24px; }
+.bth-nav a{ font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:0.08em; color:var(--ink); transition:color .15s; }
+.bth-nav a:hover{ color:var(--accent); }
+.bth-nav a.is-active{ color:var(--accent); border-bottom:1.5px solid var(--accent); padding-bottom:2px; }
+.bth-burger{ display:none; flex-direction:column; gap:5px; padding:10px; background:transparent; border:none; cursor:pointer; }
+.bth-burger span{ display:block; width:24px; height:2px; background:var(--ink); }
+.bth-mobile-menu{ display:none; border-top:1px solid color-mix(in srgb, var(--green) 18%, transparent); background:var(--bg); padding:8px 28px 22px; }
+.bth-mobile-menu.is-open{ display:block; }
+.bth-mobile-menu nav{ display:flex; flex-direction:column; }
+.bth-mobile-menu a{ font-family:'JetBrains Mono',monospace; font-size:14px; letter-spacing:0.06em; color:var(--ink); padding:13px 0; border-bottom:1px solid rgba(47,79,61,0.1); }
+@media (max-width:879px){
+  .bth-nav{ display:none; }
+  .bth-burger{ display:inline-flex; }
+}`;
+
+  headerHtml = `<header class="bth-header" id="top">
+  <div class="bth-header__inner">
+    <a class="bth-brand" href="/">
+      <span class="bth-brand__mark"><span></span></span>
+      <span class="bth-brand__text">
+        <span class="bth-brand__name">Backyard Thru&#8209;Hike</span>
+        <span class="bth-brand__kicker">GET OUTSIDE</span>
+      </span>
+    </a>
+
+    <nav class="bth-nav">
+      <a href="/" class="is-active">Home</a>
+      <a href="/journal">Journal</a>
+      <a href="/about">About</a>
+      <a href="/library">Corner Library</a>
+    </nav>
+
+    <button class="bth-burger" type="button" aria-label="Menu"
+            aria-expanded="false" aria-controls="bth-mobile-menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <div class="bth-mobile-menu" id="bth-mobile-menu">
+    <nav>
+      <a href="/">Home</a>
+      <a href="/journal">Journal</a>
+      <a href="/about">About</a>
+      <a href="/library">Corner Library</a>
+    </nav>
+  </div>
+</header>`;
+
+  navJs = `(function () {
+  var burger = document.querySelector('.bth-burger');
+  var menu = document.getElementById('bth-mobile-menu');
+  if (!burger || !menu) return;
+
+  burger.addEventListener('click', function () {
+    var open = menu.classList.toggle('is-open');
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+
+  // close the menu after a link is tapped
+  menu.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', function () {
+      menu.classList.remove('is-open');
+      burger.setAttribute('aria-expanded', 'false');
+    });
+  });
+})();`;
+
+  /* ===================== HERO ===================== */
+  heroSvg = `<svg class="bth-hero__bg" viewBox="0 0 1440 760" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    <defs>
+      <linearGradient id="bthSky" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="var(--sky-top)"></stop>
+        <stop offset="1" stop-color="var(--sky-bottom)"></stop>
+      </linearGradient>
+    </defs>
+    <rect x="0" y="0" width="1440" height="760" fill="url(#bthSky)"></rect>
+    <circle cx="1175" cy="158" r="92" fill="var(--sun)" opacity="0.16"></circle>
+    <circle cx="1175" cy="158" r="56" fill="var(--sun)" opacity="0.9"></circle>
+    <g stroke="var(--ridge-near)" fill="none" opacity="0.13" stroke-width="1.4">
+      <path d="M-40,250 C 240,200 520,210 760,234 C 1020,260 1260,238 1500,250"></path>
+      <path d="M-40,300 C 260,256 540,266 780,288 C 1040,312 1280,292 1500,302"></path>
+      <path d="M-40,196 C 220,150 480,160 720,182 C 980,206 1240,186 1500,196"></path>
+    </g>
+    <path d="M0,330 C 220,288 380,320 600,300 C 820,280 980,322 1200,302 C 1320,291 1400,312 1440,304 L1440,760 L0,760 Z" fill="var(--ridge-far)"></path>
+    <path d="M0,420 C 240,378 420,420 640,398 C 880,374 1040,422 1260,400 C 1360,389 1410,410 1440,404 L1440,760 L0,760 Z" fill="var(--ridge-mid)"></path>
+    <path d="M0,512 C 220,478 440,520 680,496 C 920,472 1080,520 1300,498 C 1370,491 1410,506 1440,502 L1440,760 L0,760 Z" fill="var(--ridge-near)"></path>
+    <path d="M0,604 C 260,576 480,612 720,590 C 960,568 1160,612 1380,592 L1440,600 L1440,760 L0,760 Z" fill="var(--ridge-fore)"></path>
+  </svg>`;
+
+  heroCss = `.bth-hero{ position:relative; min-height:clamp(580px,90vh,840px); display:flex; align-items:flex-start; overflow:hidden; }
+.bth-hero__bg{ position:absolute; inset:0; width:100%; height:100%; }
+.bth-hero__inner{ position:relative; z-index:2; max-width:1200px; margin:0 auto; width:100%; padding:clamp(70px,11vh,128px) 28px 60px; }
+.bth-hero__col{ max-width:720px; }
+.bth-pill{ display:inline-flex; align-items:center; gap:8px; font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.22em; color:var(--green); background:color-mix(in srgb, var(--bg) 70%, transparent); padding:6px 12px; border-radius:999px; border:1px solid color-mix(in srgb, var(--green) 22%, transparent); }
+.bth-pill__dot{ width:6px; height:6px; border-radius:50%; background:var(--accent); }
+.bth-hero h1{ font-family:'Zilla Slab',serif; font-weight:700; font-size:clamp(2.7rem,6.2vw,5rem); line-height:0.98; letter-spacing:-0.02em; color:var(--ink); margin-top:22px; text-wrap:balance; }
+.bth-hero__lede{ font-family:'Inter',sans-serif; font-size:clamp(1.05rem,1.7vw,1.3rem); line-height:1.55; color:var(--ink-soft); margin-top:22px; max-width:560px; text-wrap:pretty; }
+.bth-cta-row{ display:flex; flex-wrap:wrap; gap:14px; margin-top:34px; }
+.bth-btn{ display:inline-flex; align-items:center; gap:9px; font-family:'JetBrains Mono',monospace; font-size:13px; letter-spacing:0.05em; font-weight:500; padding:14px 22px; border-radius:8px; cursor:pointer; transition:filter .15s, background .15s; }
+.bth-btn--primary{ background:var(--accent); color:var(--off-white); border:none; box-shadow:0 6px 16px -8px rgba(0,0,0,0.4); }
+.bth-btn--primary:hover{ filter:brightness(1.07); }
+.bth-btn--outline{ color:var(--green); border:1.5px solid var(--green); background:color-mix(in srgb, var(--bg) 55%, transparent); }
+.bth-btn--outline:hover{ background:color-mix(in srgb, var(--green) 10%, var(--bg)); }`;
+
+  heroHtml = `<section class="bth-hero">
+  ${this.heroSvg}
+  <div class="bth-hero__inner">
+    <div class="bth-hero__col">
+      <span class="bth-pill"><span class="bth-pill__dot"></span>PLATTSBURG, MO &middot; 39.5656&deg;N</span>
+      <h1>Find the trail in your own backyard.</h1>
+      <p class="bth-hero__lede">A field journal and lending library for the people of Plattsburg &mdash; for anyone who wants to find a little wildness in the ordinary ground underfoot. No summit required.</p>
+      <div class="bth-cta-row">
+        <a class="bth-btn bth-btn--primary" href="/journal">Read the Journal &rarr;</a>
+        <a class="bth-btn bth-btn--outline" href="/library">Visit the Corner Library</a>
+      </div>
+    </div>
+  </div>
+</section>`;
+
+  /* ===================== ELEVATION DIVIDER ===================== */
+  dividerCss = `.bth-divider{ background:var(--ridge-fore); line-height:0; }
+.bth-divider svg{ display:block; width:100%; height:62px; }`;
+
+  dividerHtml = `<div class="bth-divider" aria-hidden="true">
+  <svg viewBox="0 0 1440 70" preserveAspectRatio="none">
+    <path d="M0,52 L120,40 L210,58 L320,30 L430,46 L560,18 L660,42 L790,26 L920,50 L1030,32 L1160,54 L1280,36 L1380,52 L1440,42 L1440,70 L0,70 Z" fill="var(--accent)"></path>
+    <path d="M0,52 L120,40 L210,58 L320,30 L430,46 L560,18 L660,42 L790,26 L920,50 L1030,32 L1160,54 L1280,36 L1380,52 L1440,42" fill="none" stroke="var(--accent)" stroke-width="2" opacity="0.55"></path>
+  </svg>
+</div>`;
+
+  /* ===================== JOURNAL ===================== */
+  journalCss = `.bth-section{ max-width:1200px; margin:0 auto; padding:clamp(56px,8vw,96px) 28px; }
+.bth-section__head{ display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:16px; margin-bottom:40px; }
+.bth-eyebrow{ font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.26em; color:var(--accent); margin-bottom:12px; }
+.bth-h2{ font-family:'Zilla Slab',serif; font-weight:700; font-size:clamp(1.9rem,3.6vw,2.9rem); line-height:1.03; letter-spacing:-0.015em; color:var(--ink); }
+.bth-seelink{ font-family:'JetBrains Mono',monospace; font-size:12px; letter-spacing:0.06em; color:var(--green); border-bottom:1.5px solid var(--accent); padding-bottom:3px; transition:color .15s; }
+.bth-seelink:hover{ color:var(--accent); }
+.bth-card-grid{ display:grid; grid-template-columns:repeat(auto-fit, minmax(290px,1fr)); gap:26px; }
+.bth-card{ display:flex; flex-direction:column; background:var(--card); border:1px solid rgba(47,79,61,0.12); border-left:4px solid var(--green); border-radius:4px; overflow:hidden; box-shadow:0 10px 26px -22px rgba(38,48,42,0.7); }
+/* empty-state fallback = diagonal stripe; a real <img> covers it once present */
+.bth-card__thumb{ height:188px; width:100%; object-fit:cover; display:block; background:repeating-linear-gradient(135deg, rgba(47,79,61,0.06) 0 10px, rgba(47,79,61,0.11) 10px 20px); }
+.bth-card__body{ padding:20px 20px 22px; display:flex; flex-direction:column; flex:1; }
+.bth-tags{ display:flex; flex-wrap:wrap; gap:7px; margin-bottom:13px; }
+.bth-tag{ font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.1em; color:var(--slate); border:1px solid color-mix(in srgb, var(--slate) 40%, transparent); padding:3px 8px; border-radius:4px; }
+.bth-card h3{ font-family:'Zilla Slab',serif; font-weight:600; font-size:1.32rem; line-height:1.12; letter-spacing:-0.01em; color:var(--ink); }
+.bth-card__excerpt{ font-family:'Inter',sans-serif; font-size:0.95rem; line-height:1.55; color:var(--ink-soft); margin-top:10px; flex:1; text-wrap:pretty; }
+.bth-card__meta{ display:flex; align-items:center; gap:10px; margin-top:18px; padding-top:14px; border-top:1px solid rgba(47,79,61,0.1); font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:0.08em; color:var(--ink-soft); }
+.bth-card__meta .dot{ opacity:0.4; }`;
+
+  journalCard(slot, tags, title, excerpt, date, read) {
+    var t = tags.map(function (x) { return '<span class="bth-tag">' + x + '</span>'; }).join('\n        ');
+    return `<article class="bth-card">
+      <img class="bth-card__thumb" src="${slot}" alt="" loading="lazy">
+      <div class="bth-card__body">
+        <div class="bth-tags">
+        ${t}
+        </div>
+        <h3>${title}</h3>
+        <p class="bth-card__excerpt">${excerpt}</p>
+        <div class="bth-card__meta">
+          <span>${date}</span><span class="dot">&bull;</span><span>${read}</span>
+        </div>
+      </div>
+    </article>`;
+  }
+
+  get journalSnippet() {
+    return `<section class="bth-section" id="journal">
+  <div class="bth-section__head">
+    <div>
+      <div class="bth-eyebrow">FIELD JOURNAL</div>
+      <h2 class="bth-h2">Lately, on the trail</h2>
+    </div>
+    <a class="bth-seelink" href="/journal">All entries &rarr;</a>
+  </div>
+
+  <div class="bth-card-grid">
+    <!-- repeat one <article> per CMS post -->
+    ${this.journalCard('/img/lake-dawn.jpg', ['LAKESIDE','EASY'], 'Smithville Lake at First Light', 'Out the door by 5:40, fog still sitting on the water. Two herons and a beaver wake &mdash; all before the first boat trailer hit the ramp.', 'JUN 18, 2026', '4 MIN READ')}
+  </div>
+</section>`;
+  }
+
+  get journalPreview() {
+    return `<section class="bth-section" id="journal">
+  <div class="bth-section__head">
+    <div>
+      <div class="bth-eyebrow">FIELD JOURNAL</div>
+      <h2 class="bth-h2">Lately, on the trail</h2>
+    </div>
+    <a class="bth-seelink" href="/journal">All entries &rarr;</a>
+  </div>
+  <div class="bth-card-grid">
+    ${this.journalCard('', ['LAKESIDE','EASY'], 'Smithville Lake at First Light', 'Out the door by 5:40, fog still sitting on the water. Two herons and a beaver wake &mdash; all before the first boat trailer hit the ramp.', 'JUN 18, 2026', '4 MIN READ')}
+    ${this.journalCard('', ['BACKYARD','MAPPING'], 'Three Maples and a Stone Wall', 'You can survey a quarter-acre like it&rsquo;s the Ozark backcountry. Here&rsquo;s how I mapped every tree, burrow, and game trail behind the house.', 'JUN 11, 2026', '6 MIN READ')}
+    ${this.journalCard('', ['BLUFF','MODERATE'], 'Smithville Bluffs Before Breakfast', 'A 1.2-mile loop up the timbered bluffs, done before the lot fills. Smithville Lake laid out flat and silver to the south.', 'JUN 03, 2026', '5 MIN READ')}
+  </div>
+</section>`;
+  }
+
+  /* ===================== CORNER LIBRARY ===================== */
+  libraryCss = `.bth-library{ background:color-mix(in srgb, var(--green) 9%, var(--bg)); border-top:1px solid rgba(47,79,61,0.12); border-bottom:1px solid rgba(47,79,61,0.12); }
+.bth-library__inner{ max-width:1200px; margin:0 auto; padding:clamp(56px,8vw,96px) 28px; display:grid; grid-template-columns:repeat(auto-fit, minmax(320px,1fr)); gap:48px; align-items:center; }
+.bth-library__media{ position:relative; }
+.bth-library__photo{ width:100%; height:clamp(280px,34vw,400px); object-fit:cover; display:block; border-radius:10px; border:1px solid rgba(47,79,61,0.18); background:repeating-linear-gradient(135deg, rgba(47,79,61,0.06) 0 10px, rgba(47,79,61,0.11) 10px 20px); }
+.bth-badge{ position:absolute; inset:-10px -10px auto auto; width:84px; height:84px; transform:rotate(8deg); background:var(--accent); color:var(--off-white); border-radius:50%; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:0.1em; line-height:1.4; box-shadow:0 8px 18px -8px rgba(0,0,0,0.45); z-index:2; }
+.bth-library__lede{ font-family:'Inter',sans-serif; font-size:1.05rem; line-height:1.6; color:var(--ink-soft); margin-top:18px; max-width:480px; text-wrap:pretty; }
+.bth-itemlist{ margin-top:26px; display:flex; flex-direction:column; border:1px solid rgba(47,79,61,0.14); border-radius:8px; overflow:hidden; background:var(--card); }
+.bth-item{ display:flex; align-items:center; justify-content:space-between; gap:16px; padding:14px 18px; border-bottom:1px solid rgba(47,79,61,0.09); }
+.bth-item:last-child{ border-bottom:none; }
+.bth-item__name{ font-family:'Inter',sans-serif; font-weight:500; font-size:0.98rem; color:var(--ink); }
+.bth-status{ font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.08em; padding:4px 9px; border-radius:999px; white-space:nowrap; }
+.bth-status--in{ background:color-mix(in srgb, var(--green) 16%, transparent); color:var(--green); }
+.bth-status--out{ background:color-mix(in srgb, var(--rust) 16%, transparent); color:var(--rust); }
+.bth-status--seasonal{ background:color-mix(in srgb, var(--slate) 18%, transparent); color:var(--slate); }
+.bth-library__actions{ display:flex; flex-wrap:wrap; align-items:center; gap:16px; margin-top:24px; }
+.bth-btn--green{ background:var(--green); color:var(--off-white); border:none; }
+.bth-btn--green:hover{ filter:brightness(1.1); }
+.bth-note{ font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.04em; color:var(--ink-soft); }`;
+
+  libraryHtml = `<section class="bth-library" id="library">
+  <div class="bth-library__inner">
+    <div class="bth-library__media">
+      <div class="bth-badge">FREE<br>TO<br>BORROW</div>
+      <img class="bth-library__photo" src="/img/gear-shelf.jpg" alt="The lending shelf in the front room off the square">
+    </div>
+    <div>
+      <div class="bth-eyebrow">THE CORNER LIBRARY</div>
+      <h2 class="bth-h2">Borrow what you need.<br>Return it when you&rsquo;re done.</h2>
+      <p class="bth-library__lede">A shelf of shared gear and well-worn field guides, kept in the front room just off the square downtown. Take a pack for the weekend, a guidebook for the season &mdash; leave it better than you found it.</p>
+
+      <div class="bth-itemlist">
+        <div class="bth-item"><span class="bth-item__name">Osprey Daypack &mdash; 28L</span><span class="bth-status bth-status--in">AVAILABLE</span></div>
+        <div class="bth-item"><span class="bth-item__name">Field Guide: Missouri Wildflowers</span><span class="bth-status bth-status--in">AVAILABLE</span></div>
+        <div class="bth-item"><span class="bth-item__name">Trekking Poles (pair)</span><span class="bth-status bth-status--out">OUT &middot; BACK FRI</span></div>
+        <div class="bth-item"><span class="bth-item__name">Two-Person Tent</span><span class="bth-status bth-status--in">AVAILABLE</span></div>
+        <div class="bth-item"><span class="bth-item__name">Snowshoes &mdash; Women&rsquo;s M</span><span class="bth-status bth-status--seasonal">SEASONAL</span></div>
+      </div>
+
+      <div class="bth-library__actions">
+        <a class="bth-btn bth-btn--green" href="/library">Browse the full library &rarr;</a>
+        <span class="bth-note">or drop a request in the box on the square.</span>
+      </div>
+    </div>
+  </div>
+</section>`;
+
+  /* ===================== FOOTER + TICKER ===================== */
+  footerCss = `.bth-footer{ background:var(--ridge-fore); color:#E7E2CF; }
+.bth-ticker{ display:flex; align-items:center; gap:14px; padding:13px 28px; border-bottom:1px solid rgba(255,255,255,0.12); overflow:hidden; }
+.bth-ticker__chip{ flex:0 0 auto; font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.14em; color:var(--bg); background:var(--accent); padding:5px 9px; border-radius:4px; }
+.bth-ticker__text{ font-family:'JetBrains Mono',monospace; font-size:12.5px; letter-spacing:0.02em; color:#EDE8D6; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.bth-ticker__text.is-changing{ animation:bthFade 0.5s ease both; }
+.bth-footer__grid{ max-width:1200px; margin:0 auto; padding:clamp(48px,6vw,72px) 28px 30px; display:grid; grid-template-columns:repeat(auto-fit, minmax(220px,1fr)); gap:40px; }
+.bth-footer__brandcol{ grid-column:1 / -1; max-width:520px; }
+.bth-wordmark{ font-family:'Zilla Slab',serif; font-weight:700; font-size:clamp(2.4rem,5vw,3.4rem); line-height:0.95; letter-spacing:-0.02em; color:var(--bg); }
+.bth-footer__brandcol p{ font-family:'Inter',sans-serif; font-size:0.98rem; line-height:1.6; color:rgba(231,226,207,0.78); margin-top:16px; }
+.bth-footer__col{ display:flex; flex-direction:column; gap:11px; }
+.bth-footer__coltitle{ font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:0.2em; color:rgba(231,226,207,0.5); margin-bottom:4px; }
+.bth-footer__col a{ font-family:'Inter',sans-serif; font-size:0.95rem; color:#E7E2CF; transition:color .15s; }
+.bth-footer__col a:hover{ color:#fff; }
+.bth-footer__addr{ font-family:'Inter',sans-serif; font-size:0.95rem; color:rgba(231,226,207,0.82); }
+.bth-footer__coords{ font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:0.06em; color:rgba(231,226,207,0.6); margin-top:4px; }
+.bth-footer__bottom{ max-width:1200px; margin:0 auto; padding:18px 28px 28px; border-top:1px solid rgba(255,255,255,0.12); display:flex; flex-wrap:wrap; justify-content:space-between; gap:10px; font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:0.08em; color:rgba(231,226,207,0.55); }`;
+
+  footerHtml = `<footer class="bth-footer">
+  <div class="bth-ticker">
+    <span class="bth-ticker__chip">TRAIL TIP</span>
+    <span class="bth-ticker__text" data-bth-tip>Chiggers love the tall grass by July &mdash; tuck your socks in.</span>
+  </div>
+
+  <div class="bth-footer__grid">
+    <div class="bth-footer__brandcol">
+      <div class="bth-wordmark">Get Outside.</div>
+      <p>A backyard thru-hike is just a long walk that starts at your own back door. Start one this week.</p>
+    </div>
+    <div class="bth-footer__col">
+      <div class="bth-footer__coltitle">EXPLORE</div>
+      <a href="/">Home</a>
+      <a href="/journal">Journal</a>
+      <a href="/about">About</a>
+      <a href="/library">Corner Library</a>
+    </div>
+    <div class="bth-footer__col">
+      <div class="bth-footer__coltitle">FIND US</div>
+      <span class="bth-footer__addr">On the courthouse square</span>
+      <span class="bth-footer__addr">Plattsburg, MO 64477</span>
+      <span class="bth-footer__coords">39.5656&deg;N, 94.4477&deg;W</span>
+    </div>
+  </div>
+
+  <div class="bth-footer__bottom">
+    <span>&copy; 2026 BACKYARD THRU-HIKE</span>
+    <span>BACKYARDTHRUHIKE.COM</span>
+  </div>
+</footer>`;
+
+  tickerJs = `(function () {
+  // Season comes from <html data-season="...">; defaults to summer.
+  var TIPS = {
+    summer: [
+      'Chiggers love the tall grass by July — tuck your socks in.',
+      'Wild blackberries ripen along the old rail trail by late August.',
+      'Listen for the dickcissel buzzing its name from the fence posts.'
+    ],
+    fall: [
+      'Oak and hickory peak in late October — the bluffs go gold and rust.',
+      'First frost usually lands by mid-October. Cover the late tomatoes.',
+      'Watch for monarchs funneling south through the prairie in September.'
+    ],
+    winter: [
+      'Bald eagles gather below Smithville Dam through January.',
+      'Track prints in new snow: fox tracks run in a near-straight line.',
+      'Thin ice in the lake coves even when the middle looks solid. Stay on the bank.'
+    ],
+    spring: [
+      'Spring ephemerals — trout lily, trillium — bloom before the canopy leafs out.',
+      'Listen for spring peepers in the wet meadows by mid-April.',
+      'Mud season: stick to gravel paths so the trails don\\'t rut.'
+    ]
+  };
+
+  var el = document.querySelector('[data-bth-tip]');
+  if (!el) return;
+  var season = document.documentElement.getAttribute('data-season') || 'summer';
+  var list = TIPS[season] || TIPS.summer;
+  var i = 0;
+  el.textContent = list[0];
+  if (list.length < 2) return;          // set rotateTips=false → leave the first tip
+
+  setInterval(function () {
+    i = (i + 1) % list.length;
+    el.classList.remove('is-changing');
+    void el.offsetWidth;                 // restart the fade
+    el.textContent = list[i];
+    el.classList.add('is-changing');
+  }, 5200);
+})();`;
+
+  doc(season, css, html, js) {
+    return '<!doctype html><html lang="en" data-season="' + (season || 'summer') + '"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
+      + this.font + '<style>' + this.baseCss + this.tokenCss + css + '</style></head><body>'
+      + html + (js ? '<scr' + 'ipt>' + js + '</scr' + 'ipt>' : '') + '</body></html>';
+  }
+
+  renderVals() {
+    const copy = (text) => (e) => {
+      try { navigator.clipboard.writeText(text); } catch (_) {}
+      const b = e.currentTarget;
+      const orig = b.getAttribute('data-label') || b.textContent;
+      b.setAttribute('data-label', orig);
+      b.textContent = 'Copied \u2713';
+      setTimeout(() => { b.textContent = orig; }, 1300);
+    };
+    const mk = (lang, text) => ({ lang, text, copy: copy(text) });
+
+    // header — desktop + a forced-open mobile variant for the preview
+    const headerOpenHtml = this.headerHtml
+      .replace('class="bth-mobile-menu" id="bth-mobile-menu"', 'class="bth-mobile-menu is-open" id="bth-mobile-menu"')
+      .replace('aria-expanded="false"', 'aria-expanded="true"');
+
+    const deliverables = [
+      {
+        num: '01', id: 'header', title: 'Header + hamburger nav',
+        blurb: 'Sticky, blurred top bar with the diamond brand mark. Desktop nav shows inline links; below 880px it collapses to the hamburger, which toggles the .is-open dropdown and flips aria-expanded. The active page gets .is-active.',
+        previews: [
+          { label: 'DESKTOP \u2265 880px', srcdoc: this.doc('summer', this.headerCss, this.headerHtml + '<div style="height:120px"></div>', this.navJs), width: '100%', height: 200 },
+          { label: 'MOBILE < 880px \u00b7 MENU OPEN (tap the bars to toggle)', srcdoc: this.doc('summer', this.headerCss, headerOpenHtml + '<div style="height:30px"></div>', this.navJs), width: '380', height: 300 }
+        ],
+        code: [ mk('HTML', this.headerHtml), mk('CSS', this.headerCss), mk('JS', this.navJs) ]
+      },
+      {
+        num: '02', id: 'hero', title: 'Hero',
+        blurb: 'Full-bleed inline-SVG ridgeline (sky gradient + sun + contour lines + four silhouette bands, all theme-driven) behind a left-aligned column: location pill, display H1, lede, and two CTAs. Copy the SVG path d-values verbatim. Note: the gradient id "bthSky" must be unique if you ever render two heroes on one page.',
+        previews: [ { label: 'LIVE', srcdoc: this.doc('summer', this.heroCss, this.heroHtml), width: '100%', height: 620 } ],
+        code: [ mk('HTML  (includes the full SVG)', this.heroHtml), mk('CSS', this.heroCss) ]
+      },
+      {
+        num: '03', id: 'divider', title: 'Elevation divider',
+        blurb: 'A forest-green band carrying a jagged rust mountain-profile polygon plus a 2px stroke tracing its top edge. Sits flush under the hero. preserveAspectRatio="none" lets it stretch to any width.',
+        previews: [ { label: 'LIVE', srcdoc: this.doc('summer', this.dividerCss, '<div style="height:40px;background:var(--bg)"></div>' + this.dividerHtml, ''), width: '100%', height: 120 } ],
+        code: [ mk('HTML', this.dividerHtml), mk('CSS', this.dividerCss) ]
+      },
+      {
+        num: '04', id: 'journal', title: 'Journal cards',
+        blurb: 'Auto-fit card grid (no media query needed). Each card has a 4px green left border, a photo area whose diagonal-stripe background is the empty-state fallback behind the <img>, mono tag chips, a Zilla Slab title, excerpt, and a mono date • read-time meta row. Loop one <article> per CMS post.',
+        previews: [ { label: 'LIVE', srcdoc: this.doc('summer', this.journalCss, this.journalPreview), width: '100%', height: 560 } ],
+        code: [ mk('HTML  (one card shown — repeat per post)', this.journalSnippet), mk('CSS', this.journalCss) ]
+      },
+      {
+        num: '05', id: 'library', title: 'Corner Library',
+        blurb: 'Full-width tinted band, two-column auto-fit. Left: gear photo with a rotated "FREE TO BORROW" badge overlapping the corner. Right: heading, lede, an item list with status pills (in / out / seasonal), a green CTA, and a helper note.',
+        previews: [ { label: 'LIVE', srcdoc: this.doc('summer', this.libraryCss + this.heroCss, this.libraryHtml), width: '100%', height: 600 } ],
+        code: [ mk('HTML', this.libraryHtml), mk('CSS', this.libraryCss) ]
+      },
+      {
+        num: '06', id: 'footer', title: 'Footer + trail-tip ticker',
+        blurb: 'Forest-green footer. The top ticker bar rotates a season-specific tip every 5.2s with a short fade (reads data-season off <html>; set rotateTips=false → keep only the first tip). Below: the big "Get Outside." wordmark, an EXPLORE column, a FIND US column, and the legal bottom bar.',
+        previews: [ { label: 'LIVE \u00b7 tip rotates every 5.2s', srcdoc: this.doc('summer', this.footerCss, this.footerHtml, this.tickerJs), width: '100%', height: 440 } ],
+        code: [ mk('HTML', this.footerHtml), mk('CSS', this.footerCss), mk('JS', this.tickerJs) ]
+      }
+    ];
+
+    const labelName = { summer: 'Summer (default)', fall: 'Fall', winter: 'Winter', spring: 'Spring' };
+    const selFor = { summer: ':root', fall: '[data-season="fall"]', winter: '[data-season="winter"]', spring: '[data-season="spring"]' };
+    const paletteRows = Object.keys(this.palettes).map((name) => ({
+      name: labelName[name],
+      sel: selFor[name],
+      vars: Object.keys(this.palettes[name]).map((k) => ({ label: k, hex: this.palettes[name][k] }))
+    }));
+
+    return {
+      deliverables,
+      paletteRows,
+      tokenCss: this.tokenCss,
+      copyTokens: copy(this.tokenCss),
+      toc: deliverables.map((d) => ({ num: d.num, title: d.title, id: d.id }))
+    };
+  }
+}
+</script>
+</body>
+</html>
