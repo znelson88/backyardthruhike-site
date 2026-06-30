@@ -2,9 +2,10 @@
 title: The American Groundnut
 date: 2026-06-29
 type: Essay
-summary: The vine I kept ripping out of the fence row turned out to be hopniss — the American groundnut — a nitrogen-fixing native with tubers richer than a potato. A few thoughts on the useful things we fight without knowing it.
+summary: " A few thoughts on the useful things we fight without knowing it."
 image: /images/american-groundnut.jpg
-image_alt: American groundnut vine, with bright green compound leaves, climbing a galvanized pipe and barbed-wire fence in a backyard.
+image_alt: American groundnut vine, with bright green compound leaves, climbing
+  a galvanized pipe and barbed-wire fence in a backyard.
 ---
 
 If you have spent much time digging around in your backyard, you have thought about those annoying plants crowding out your labor of love. Even if you do just a seasonal cleanup you will know the things that take over, their annoying consistency. You may have even wondered to yourself, "what is this thing? I have pulled it over and over, but it still comes back!" I have one of those right now. It is a vine that shoots up out of the ground and climbs everything. It pulls down plants, takes over fence rows. After pulling these out repeatedly I got the bright idea of digging up the whole root system to see what it was doing underground. I traced the shoot and found a tuberous bulb and a string connected to another tuber… then another, and another, all strung together like a set of pearls. Great, aliens, that explains it. Well, that's weird, in the trash they go.
